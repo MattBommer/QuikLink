@@ -25,10 +25,15 @@ class AuthViewModel: ObservableObject {
     }
     
     func refreshAuthenticationStatus() {
-        if let refreshToken = JsonWebTokenStore.shared.refreshToken, !refreshToken.expired  {
-            status = .authenticated
+        var authStatus: AuthenticationStatus = .unauthenticated
+        defer { status = authStatus }
+        
+        guard let refreshToken = JsonWebTokenStore.shared.refreshToken else { return }
+        
+        if refreshToken.expired {
+            JsonWebTokenStore.shared.deleteStaleTokens()
         } else {
-            status = .unauthenticated
+            authStatus = .authenticated
         }
     }
     
@@ -41,22 +46,23 @@ class AuthViewModel: ObservableObject {
         switch response {
         case .success(let tokens):
             try JsonWebTokenStore.shared.setTokens(tokens)
-            await MainActor.run(body: { status = .authenticated })
         default:
-            await MainActor.run(body: { status = .unauthenticated })
+            break
         }
+        
+        await MainActor.run(body: { refreshAuthenticationStatus() })
     }
     
     func signUp(user: User) async throws -> String? {
         let requestInfo = RequestInfo(path: "signup", httpMethod: .post, headers: nil, body: user)
         guard let urlRequest = Network.shared.buildRequest(from: requestInfo) else { return nil }
 
-        let response: Response<String> = try await Network.shared.fetch(request: urlRequest)
+        let response: Response<SignUpMessage> = try await Network.shared.fetch(request: urlRequest)
         
         var result: String
         switch response {
-        case .success(let message):
-            result = message
+        case .success(let signUpMessage):
+            result = signUpMessage.message
         case .failed(let message):
             result = message
         }

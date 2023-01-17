@@ -60,8 +60,8 @@ class JsonWebTokenStore {
 
     }
     
-    internal func removeTokens() throws {
-        try keychain.removeAll()
+    internal func deleteStaleTokens() {
+        try? keychain.removeAll()
     }
     
     private func retrieveToken(key: String) -> JWT? {

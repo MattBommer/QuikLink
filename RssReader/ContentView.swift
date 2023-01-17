@@ -13,7 +13,7 @@ struct ContentView: View {
     var body: some View {
         switch authViewModel.status {
         case .authenticated:
-            RSSFeedView()
+            HomeView()
         case .unauthenticated, .notSet:
             LoginView(authViewModel: authViewModel)
         }

@@ -13,6 +13,10 @@ struct LoginView: View {
     @State var password: String = ""
     @State var signUpStatus: String = ""
     
+    var user: User {
+        User(username: username, password: password)
+    }
+    
     var body: some View {
         VStack(spacing: 48) {
             Text("Simple Rss Reader")
@@ -36,7 +40,6 @@ struct LoginView: View {
             VStack(spacing: 8) {
                 Button {
                     Task {
-                        guard let user = validateCreds(username: username, password: password) else { return }
                         try await authViewModel.login(user: user)
                     }
                 } label: {
@@ -52,7 +55,6 @@ struct LoginView: View {
                 
                 Button {
                     Task {
-                        guard let user = validateCreds(username: username, password: password) else { return }
                         guard let message = try await authViewModel.signUp(user: user) else { return }
                         signUpStatus = message
                     }
@@ -67,16 +69,6 @@ struct LoginView: View {
             Spacer()
         }
         .padding()
-    }
-    
-    
-    func validateCreds(username: String, password: String) -> User? {
-        guard !username.isEmpty,
-              !password.isEmpty,
-              username.count > 8,
-              password.count > 8 else { return nil }
-        
-        return User(username: username, password: password)
     }
 }
 

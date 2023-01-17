@@ -7,16 +7,19 @@
 
 import SwiftUI
 
-struct RSSFeedView: View {
+struct HomeView: View {
     var body: some View {
-        VStack {
-            Text("You're authenticated")
+        ZStack {
+            HomeHeaderView()
+            LazyVStack {
+                FeedView(feed: <#T##RSSFeed#>)
+            }
         }
     }
 }
 
 struct RSSFeedView_Previews: PreviewProvider {
     static var previews: some View {
-        RSSFeedView()
+        HomeView()
     }
 }
