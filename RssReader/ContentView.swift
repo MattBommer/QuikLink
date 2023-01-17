@@ -8,9 +8,15 @@
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject var authViewModel = AuthViewModel()
+    
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        switch authViewModel.status {
+        case .authenticated:
+            RSSFeedView()
+        case .unauthenticated, .notSet:
+            LoginView(authViewModel: authViewModel)
+        }
     }
 }
 

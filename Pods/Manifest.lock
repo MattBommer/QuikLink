@@ -1,0 +1,20 @@
+PODS:
+  - JWTDecode (3.0.0)
+  - KeychainAccess (4.2.2)
+
+DEPENDENCIES:
+  - JWTDecode (~> 3.0)
+  - KeychainAccess (~> 4.2)
+
+SPEC REPOS:
+  trunk:
+    - JWTDecode
+    - KeychainAccess
+
+SPEC CHECKSUMS:
+  JWTDecode: 82480a7173f8a811954e7e14a2b59f688ca4222a
+  KeychainAccess: c0c4f7f38f6fc7bbe58f5702e25f7bd2f65abf51
+
+PODFILE CHECKSUM: 5214e65ac89e1873536ef9976f27fdf770a3cd91
+
+COCOAPODS: 1.11.3
