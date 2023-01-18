@@ -69,4 +69,9 @@ class AuthViewModel: ObservableObject {
         
         return result
     }
+    
+    func logOut() {
+        JsonWebTokenStore.shared.deleteStaleTokens()
+        status = .unauthenticated
+    }
 }

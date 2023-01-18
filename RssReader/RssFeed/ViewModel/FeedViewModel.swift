@@ -9,13 +9,29 @@ import Foundation
 
 @MainActor
 class RSSFeedViewModel: ObservableObject {
+    
+    enum State {
+        case idle
+        case loading
+    }
+        
     @Published var feeds: [RSSFeed] = []
     
+    @Published private(set) var state: State = .idle
+        
     func addFeed() {
         
     }
     
     func fetchFeeds() async throws {
+        await MainActor.run{ state = .loading }
+        
+        defer {
+            Task {
+                await MainActor.run { state = .idle }
+            }
+        }
+        
         let requestInfo: RequestInfo<String> = RequestInfo(path: "feed/fetch", httpMethod: .get, headers: nil, body: nil)
         guard let request = Network.shared.buildRequest(from: requestInfo, needsAuthHeader: true) else { return }
         

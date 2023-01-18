@@ -14,6 +14,7 @@ struct ContentView: View {
         switch authViewModel.status {
         case .authenticated:
             HomeView()
+                .environmentObject(authViewModel)
         case .unauthenticated, .notSet:
             LoginView(authViewModel: authViewModel)
         }

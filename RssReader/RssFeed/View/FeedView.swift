@@ -9,22 +9,17 @@ import SwiftUI
 
 struct FeedView: View {
     var feed: RSSFeed
-    
     var body: some View {
         VStack {
-            AsyncImage(url: URL(feed.imageUrl)) { fetchStatus in
-                if let image = fetchStatus.image {
+            AsyncImage(url: feed.imageUrl, scale: 1.0) { phase in
+                switch phase {
+                case .success(let image):
                     styleFeedImage(image)
-                } else if fetchStatus.error != nil {
-                    let defaultImage = UIImage(named: "noimage")!
-                    styleFeedImage(Image(uiImage: defaultImage))
-                } else {
-                    ProgressView()
-                        .frame(maxWidth: .infinity)
-                        .frame(height: 150)
+                default:
+                    styleFeedImage(Image(uiImage: UIImage(named: "noimage")!))
                 }
             }
-            
+
             VStack(alignment: .leading) {
                 Text(feed.title)
                     .font(.headline)
@@ -60,7 +55,7 @@ struct FeedView: View {
 
 struct FeedView_Previews: PreviewProvider {
     static var previews: some View {
-        let exampleFeed: RSSFeed = .init(resourceId: "1ljga8eng032dsal", title: "New York Times", rssUrl: "The front page of world wide news!")
+        let exampleFeed = RSSFeed(id: "asgohasdpoguh", title: "The New York Times")
         FeedView(feed: exampleFeed)
     }
 }

@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct HomeHeaderView: View {
+    @EnvironmentObject private var AuthViewModel: AuthViewModel
     var body: some View {
         VStack {
             HStack {
@@ -15,26 +16,29 @@ struct HomeHeaderView: View {
                     print("add feed")
                 } label: {
                     Image(systemName: "plus")
-                        .resizable()
-                        .frame(width: 20, height: 20, alignment: .center)
-                        .padding()
+                        .headerIconStyle()
                 }
                 
                 Spacer()
                 
-                Text("Simple RSS Reader")
+                Text("Real Simple Syndication")
                     .font(.title)
                     .padding()
-
+                
                 Spacer()
                 
                 Button {
                     print("remove feed")
                 } label: {
                     Image(systemName: "trash.fill")
-                        .resizable()
-                        .frame(width: 20, height: 20, alignment: .center)
-                        .padding()
+                        .headerIconStyle()
+                }
+                
+                Button {
+                    AuthViewModel.logOut()
+                } label: {
+                    Image(systemName: "arrow.up.right.diamond")
+                        .headerIconStyle()
                 }
             }
             .padding(.top, 24)
@@ -44,6 +48,15 @@ struct HomeHeaderView: View {
             Spacer()
         }
         .ignoresSafeArea()
+    }
+}
+
+private extension Image {
+    
+    func headerIconStyle() -> some View {
+        self.resizable()
+            .frame(width: 20, height: 20, alignment: .center)
+            .padding()
     }
 }
 

@@ -10,6 +10,8 @@
 		38977DD43695238A99C85310 /* Pods_RssReader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA0A3C9D83200CB7097A28DC /* Pods_RssReader.framework */; };
 		8053FE052970691400AE6EB4 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8053FE042970691400AE6EB4 /* LoginView.swift */; };
 		8053FE07297089A600AE6EB4 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8053FE06297089A600AE6EB4 /* HomeView.swift */; };
+		80DB140529786FA800224593 /* EmptyFeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DB140429786FA800224593 /* EmptyFeedView.swift */; };
+		80DB14072978802D00224593 /* RefreshButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DB14062978802D00224593 /* RefreshButtonView.swift */; };
 		80DFAD5129772B7C006BAED6 /* SignUpMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DFAD5029772B7C006BAED6 /* SignUpMessage.swift */; };
 		80DFAD5A29772FB9006BAED6 /* RSSFeedItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DFAD5929772FB9006BAED6 /* RSSFeedItemModel.swift */; };
 		80DFAD5C29773B7B006BAED6 /* HomeHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DFAD5B29773B7B006BAED6 /* HomeHeaderView.swift */; };
@@ -29,6 +31,8 @@
 /* Begin PBXFileReference section */
 		8053FE042970691400AE6EB4 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		8053FE06297089A600AE6EB4 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		80DB140429786FA800224593 /* EmptyFeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyFeedView.swift; sourceTree = "<group>"; };
+		80DB14062978802D00224593 /* RefreshButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshButtonView.swift; sourceTree = "<group>"; };
 		80DFAD5029772B7C006BAED6 /* SignUpMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpMessage.swift; sourceTree = "<group>"; };
 		80DFAD5929772FB9006BAED6 /* RSSFeedItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSSFeedItemModel.swift; sourceTree = "<group>"; };
 		80DFAD5B29773B7B006BAED6 /* HomeHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeHeaderView.swift; sourceTree = "<group>"; };
@@ -100,8 +104,10 @@
 			isa = PBXGroup;
 			children = (
 				8053FE06297089A600AE6EB4 /* HomeView.swift */,
+				80DB14062978802D00224593 /* RefreshButtonView.swift */,
 				80DFAD5B29773B7B006BAED6 /* HomeHeaderView.swift */,
 				80DFAD5D29773CE9006BAED6 /* FeedView.swift */,
+				80DB140429786FA800224593 /* EmptyFeedView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -319,9 +325,11 @@
 				80FC8734296E00380060D735 /* ContentView.swift in Sources */,
 				80DFAD5129772B7C006BAED6 /* SignUpMessage.swift in Sources */,
 				80DFAD5C29773B7B006BAED6 /* HomeHeaderView.swift in Sources */,
+				80DB140529786FA800224593 /* EmptyFeedView.swift in Sources */,
 				80FC8745296E065F0060D735 /* Network.swift in Sources */,
 				80FC8740296E005A0060D735 /* RSSFeedModel.swift in Sources */,
 				8053FE052970691400AE6EB4 /* LoginView.swift in Sources */,
+				80DB14072978802D00224593 /* RefreshButtonView.swift in Sources */,
 				80DFAD5A29772FB9006BAED6 /* RSSFeedItemModel.swift in Sources */,
 				80FC8743296E01730060D735 /* FeedViewModel.swift in Sources */,
 				8053FE07297089A600AE6EB4 /* HomeView.swift in Sources */,

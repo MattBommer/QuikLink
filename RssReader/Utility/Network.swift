@@ -104,7 +104,7 @@ public class Network {
         request.setValue("application/json", forHTTPHeaderField: "accept")
         
         if needsAuthHeader, let accessToken = JsonWebTokenStore.shared.accessToken  {
-            request.setValue("bearer \(accessToken)", forHTTPHeaderField: "authorization")
+            request.setValue("bearer \(accessToken.string)", forHTTPHeaderField: "authorization")
         }
         
         if let headers = requestInfo.headers {
