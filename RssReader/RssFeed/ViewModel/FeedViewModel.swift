@@ -14,7 +14,7 @@ class RSSFeedViewModel: ObservableObject {
             
     func addFeed(_ feedUrl: String) async throws {
         let body = AddFeed(feedUrl: feedUrl)
-        let requestInfo = RequestInfo(path: "feed/add", httpMethod: .get, headers: nil, body: body)
+        let requestInfo = RequestInfo(path: "feed/add", httpMethod: .get, body: body)
         guard let request = Network.shared.buildRequest(from: requestInfo, authToken: .access) else { return }
         
         let response: Response<RSSFeed> = try await Network.shared.fetch(request: request)
@@ -30,7 +30,7 @@ class RSSFeedViewModel: ObservableObject {
     }
     
     func fetchFeeds() async throws {        
-        let requestInfo: RequestInfo<String> = RequestInfo(path: "feed/fetch", httpMethod: .get, headers: nil, body: nil)
+        let requestInfo: RequestInfo<EmptyBody> = RequestInfo(path: "feed/fetch", httpMethod: .get)
         guard let request = Network.shared.buildRequest(from: requestInfo, authToken: .access) else { return }
         
         let response: Response<[RSSFeed]> = try await Network.shared.fetch(request: request)
@@ -45,7 +45,8 @@ class RSSFeedViewModel: ObservableObject {
         }
     }
     
-    func removeFeed() {
+    func removeFeed(_ feedId: String) {
+        let requestInfo: RequestInfo<String> = RequestInfo(path: "feed/fetch", httpMethod: .get, body: nil)
         
     }
 }

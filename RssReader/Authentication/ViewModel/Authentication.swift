@@ -38,7 +38,7 @@ class AuthViewModel: ObservableObject {
     }
     
     func login(user: User) async throws {
-        let requestInfo = RequestInfo(path: "login", httpMethod: .post, headers: nil, body: user)
+        let requestInfo = RequestInfo(path: "login", httpMethod: .post, body: user)
         guard let urlRequest = Network.shared.buildRequest(from: requestInfo) else { return }
         
         let response: Response<JWTTokens> = try await Network.shared.fetch(request: urlRequest)
@@ -54,7 +54,7 @@ class AuthViewModel: ObservableObject {
     }
     
     func signUp(user: User) async throws -> String? {
-        let requestInfo = RequestInfo(path: "signup", httpMethod: .post, headers: nil, body: user)
+        let requestInfo = RequestInfo(path: "signup", httpMethod: .post, body: user)
         guard let urlRequest = Network.shared.buildRequest(from: requestInfo) else { return nil }
 
         let response: Response<SignUpMessage> = try await Network.shared.fetch(request: urlRequest)
@@ -71,7 +71,7 @@ class AuthViewModel: ObservableObject {
     }
     
     func fetchFreshTokens() async throws {
-        let requestInfo: RequestInfo<String?> = RequestInfo(path: "refresh", httpMethod: .get, headers: nil, body: nil) // TODO: Is there a better way to represent an empty type?
+        let requestInfo: RequestInfo<EmptyBody> = RequestInfo(path: "refresh", httpMethod: .get)
         guard let urlRequest = Network.shared.buildRequest(from: requestInfo, authToken: .refresh) else { return }
         
         let response: Response<JWTTokens> = try await Network.shared.fetch(request: urlRequest)

@@ -50,18 +50,27 @@ public enum Response<T>: Decodable where T: Decodable {
 }
 
 public enum HTTPMethod: String {
-    case get
-    case post
-    case patch
     case delete
+    case get
+    case patch
+    case post
     case put
 }
+
+public struct EmptyBody: Codable {}
 
 struct RequestInfo<T> where T: Codable {
     var path: String
     var httpMethod: HTTPMethod
     var headers: HttpHeaders?
     var body: T?
+    
+    init(path: String, httpMethod: HTTPMethod, headers: HttpHeaders? = nil, body: T? = nil) {
+        self.path = path
+        self.httpMethod = httpMethod
+        self.headers = headers
+        self.body = body
+    }
 }
 
 public class Network {
