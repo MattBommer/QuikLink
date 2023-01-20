@@ -12,34 +12,25 @@ struct HomeView: View {
     @State private var headerHeight: CGFloat = 0
     
     var body: some View {
-        ZStack {
-                switch rssFeedViewModel.state {
-                case .idle where rssFeedViewModel.feeds.isEmpty:
-                    EmptyFeedView()
-                case .loading where rssFeedViewModel.feeds.isEmpty:
-                    ProgressView()
-                case .idle, .loading:
-                    VStack {
-                        Spacer()
-                            .frame(height: 75)
-                        ScrollView {
-                            LazyVStack {
-                                ForEach(rssFeedViewModel.feeds) { feed in
-                                    FeedView(feed: feed)
-                                }
-                            }
-                        }
+        RootModalView(backgroundColor: Color(uiColor: .gray.withAlphaComponent(0.3))) {
+            ZStack {
+                GeometryReader { reader in
+                    VStack(spacing: -8) {
+                        HomeHeaderView()
+                            .frame(width: reader.size.width, height: reader.size.height * 0.15)
+                        HomeFeedView()
+                            .frame(width: reader.size.width, height: reader.size.height * 0.85)
                     }
                 }
-            
-            HomeHeaderView()
-            RefreshFloatingActionButtonView()
-                .environmentObject(rssFeedViewModel)
-        }
-        .onAppear {
-            Task {
-                try await rssFeedViewModel.fetchFeeds()
+                .ignoresSafeArea()
+                .onAppear {
+                    Task {
+                        try await rssFeedViewModel.fetchFeeds()
+                    }
+                }
+                RefreshFloatingActionButtonView()
             }
+            .environmentObject(rssFeedViewModel)
         }
     }
 }

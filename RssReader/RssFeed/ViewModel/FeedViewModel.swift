@@ -9,31 +9,29 @@ import Foundation
 
 @MainActor
 class RSSFeedViewModel: ObservableObject {
-    
-    enum State {
-        case idle
-        case loading
-    }
         
     @Published var feeds: [RSSFeed] = []
-    
-    @Published private(set) var state: State = .idle
+            
+    func addFeed(_ feedUrl: String) async throws {
+        let body = AddFeed(feedUrl: feedUrl)
+        let requestInfo = RequestInfo(path: "feed/add", httpMethod: .get, headers: nil, body: body)
+        guard let request = Network.shared.buildRequest(from: requestInfo, authToken: .access) else { return }
         
-    func addFeed() {
+        let response: Response<RSSFeed> = try await Network.shared.fetch(request: request)
         
+        switch response {
+        case .success(let feed):
+            await MainActor.run(body: {
+                self.feeds.append(feed)
+            })
+        case .failed(let message):
+            print(message)
+        }
     }
     
-    func fetchFeeds() async throws {
-        await MainActor.run{ state = .loading }
-        
-        defer {
-            Task {
-                await MainActor.run { state = .idle }
-            }
-        }
-        
+    func fetchFeeds() async throws {        
         let requestInfo: RequestInfo<String> = RequestInfo(path: "feed/fetch", httpMethod: .get, headers: nil, body: nil)
-        guard let request = Network.shared.buildRequest(from: requestInfo, needsAuthHeader: true) else { return }
+        guard let request = Network.shared.buildRequest(from: requestInfo, authToken: .access) else { return }
         
         let response: Response<[RSSFeed]> = try await Network.shared.fetch(request: request)
         

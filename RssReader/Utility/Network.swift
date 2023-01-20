@@ -15,6 +15,12 @@ enum ResponseError: Error {
     case unknownStatus
 }
 
+enum AuthTokenType {
+    case access
+    case refresh
+    case none
+}
+
 public enum Response<T>: Decodable where T: Decodable {
     
     enum CodingKeys: String, CodingKey {
@@ -79,10 +85,8 @@ public class Network {
         let httpResponse = response as! HTTPURLResponse
         
         switch httpResponse.statusCode {
-        case 200...299:
+        case 200...399:
             print("All is well")
-        case 300...399:
-            print("Redirection occurred")
         case 400...499:
             print("Client error")
         case 500...599:
@@ -95,7 +99,7 @@ public class Network {
         return decoded
     }
     
-    func buildRequest<T>(from requestInfo: RequestInfo<T>, needsAuthHeader: Bool = false) -> URLRequest? {
+    func buildRequest<T>(from requestInfo: RequestInfo<T>, authToken: AuthTokenType = .none) -> URLRequest? {
         guard let url = URL(string: requestInfo.path, relativeTo: baseURL) else { return nil }
         var request = URLRequest(url: url)
         request.httpMethod = requestInfo.httpMethod.rawValue.capitalized
@@ -103,8 +107,13 @@ public class Network {
         request.setValue("application/json", forHTTPHeaderField: "content-type")
         request.setValue("application/json", forHTTPHeaderField: "accept")
         
-        if needsAuthHeader, let accessToken = JsonWebTokenStore.shared.accessToken  {
-            request.setValue("bearer \(accessToken.string)", forHTTPHeaderField: "authorization")
+        switch authToken {
+        case .access where JsonWebTokenStore.shared.accessToken != nil:
+            request.setValue("bearer \(JsonWebTokenStore.shared.accessToken!.string)", forHTTPHeaderField: "authorization")
+        case .refresh where JsonWebTokenStore.shared.refreshToken != nil:
+            request.setValue("bearer \(JsonWebTokenStore.shared.refreshToken!.string)", forHTTPHeaderField: "authorization")
+        default:
+            break
         }
         
         if let headers = requestInfo.headers {

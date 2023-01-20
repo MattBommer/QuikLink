@@ -26,7 +26,6 @@ struct RefreshFloatingActionButtonView: View {
                         .padding()
                         .background(Circle())
                 }
-                .disabled(feedViewModel.state == .loading)
             }
             .padding()
         }

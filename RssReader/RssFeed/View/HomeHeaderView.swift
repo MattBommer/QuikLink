@@ -8,46 +8,56 @@
 import SwiftUI
 
 struct HomeHeaderView: View {
+    @State private var addFeed: Bool = false
+    @State private var removeFeed: Bool = false
+    @State private var logout: Bool = false
+    
+    @EnvironmentObject private var modalStore: ModalStore
+    @EnvironmentObject private var rssFeedViewModel: RSSFeedViewModel
     @EnvironmentObject private var AuthViewModel: AuthViewModel
     var body: some View {
-        VStack {
-            HStack {
-                Button {
-                    print("add feed")
-                } label: {
-                    Image(systemName: "plus")
-                        .headerIconStyle()
+        HStack {
+            Button {
+                modalStore.present {
+                    AlertFormView()
                 }
-                
-                Spacer()
-                
-                Text("Real Simple Syndication")
-                    .font(.title)
-                    .padding()
-                
-                Spacer()
-                
-                Button {
-                    print("remove feed")
-                } label: {
-                    Image(systemName: "trash.fill")
-                        .headerIconStyle()
-                }
-                
-                Button {
+            } label: {
+                Image(systemName: "plus")
+                    .headerIconStyle()
+            }
+            
+            Spacer()
+            
+            Text("Real Simple Syndication")
+                .font(.title)
+                .padding()
+            
+            Spacer()
+            
+            Button {
+                removeFeed = true
+            } label: {
+                Image(systemName: "trash.fill")
+                    .headerIconStyle()
+            }
+            
+            Button {
+                logout = true
+            } label: {
+                Image(systemName: "arrow.up.right.diamond")
+                    .headerIconStyle()
+            }.confirmationDialog("Are you sure you want to logout", isPresented: $logout) {
+                Button("Logout", role: .destructive) {
                     AuthViewModel.logOut()
-                } label: {
-                    Image(systemName: "arrow.up.right.diamond")
-                        .headerIconStyle()
+                }
+                Button("Cancel", role: .cancel) {
+                    logout = false
                 }
             }
-            .padding(.top, 24)
-            .foregroundColor(.white)
-            .background(Color.blue)
-            .shadow(radius: 4)
-            Spacer()
         }
-        .ignoresSafeArea()
+        .foregroundColor(.white)
+        .background(Color.blue)
+        .shadow(radius: 4)
     }
 }
 

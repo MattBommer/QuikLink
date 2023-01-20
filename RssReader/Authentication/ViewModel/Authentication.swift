@@ -70,6 +70,22 @@ class AuthViewModel: ObservableObject {
         return result
     }
     
+    func fetchFreshTokens() async throws {
+        let requestInfo: RequestInfo<String?> = RequestInfo(path: "refresh", httpMethod: .get, headers: nil, body: nil) // TODO: Is there a better way to represent an empty type?
+        guard let urlRequest = Network.shared.buildRequest(from: requestInfo, authToken: .refresh) else { return }
+        
+        let response: Response<JWTTokens> = try await Network.shared.fetch(request: urlRequest)
+        
+        switch response {
+        case .success(let tokens):
+            try JsonWebTokenStore.shared.setTokens(tokens)
+        default:
+            break
+        }
+        
+        await MainActor.run(body: { refreshAuthenticationStatus() })
+    }
+    
     func logOut() {
         JsonWebTokenStore.shared.deleteStaleTokens()
         status = .unauthenticated

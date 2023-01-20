@@ -8,9 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		38977DD43695238A99C85310 /* Pods_RssReader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA0A3C9D83200CB7097A28DC /* Pods_RssReader.framework */; };
+		80128D682978E94E0054C6BD /* AlertFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80128D672978E94E0054C6BD /* AlertFormView.swift */; };
+		80128D6A2978EFF30054C6BD /* Modifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80128D692978EFF30054C6BD /* Modifiers.swift */; };
 		8053FE052970691400AE6EB4 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8053FE042970691400AE6EB4 /* LoginView.swift */; };
 		8053FE07297089A600AE6EB4 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8053FE06297089A600AE6EB4 /* HomeView.swift */; };
-		80DB140529786FA800224593 /* EmptyFeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DB140429786FA800224593 /* EmptyFeedView.swift */; };
+		808A8A882979C06A00332431 /* RootModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808A8A872979C06A00332431 /* RootModalView.swift */; };
+		808A8A8A2979D38600332431 /* ModalStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808A8A892979D38600332431 /* ModalStore.swift */; };
+		808A8A8F2979EB8700332431 /* HomeFeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808A8A8E2979EB8700332431 /* HomeFeedView.swift */; };
+		808A8A91297B1A6100332431 /* URL+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808A8A90297B1A6100332431 /* URL+Extension.swift */; };
+		808A8A93297B1D1700332431 /* AddFeedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808A8A92297B1D1700332431 /* AddFeedModel.swift */; };
 		80DB14072978802D00224593 /* RefreshButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DB14062978802D00224593 /* RefreshButtonView.swift */; };
 		80DFAD5129772B7C006BAED6 /* SignUpMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DFAD5029772B7C006BAED6 /* SignUpMessage.swift */; };
 		80DFAD5A29772FB9006BAED6 /* RSSFeedItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DFAD5929772FB9006BAED6 /* RSSFeedItemModel.swift */; };
@@ -29,9 +35,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		80128D672978E94E0054C6BD /* AlertFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertFormView.swift; sourceTree = "<group>"; };
+		80128D692978EFF30054C6BD /* Modifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Modifiers.swift; sourceTree = "<group>"; };
 		8053FE042970691400AE6EB4 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		8053FE06297089A600AE6EB4 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
-		80DB140429786FA800224593 /* EmptyFeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyFeedView.swift; sourceTree = "<group>"; };
+		808A8A872979C06A00332431 /* RootModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootModalView.swift; sourceTree = "<group>"; };
+		808A8A892979D38600332431 /* ModalStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalStore.swift; sourceTree = "<group>"; };
+		808A8A8E2979EB8700332431 /* HomeFeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFeedView.swift; sourceTree = "<group>"; };
+		808A8A90297B1A6100332431 /* URL+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Extension.swift"; sourceTree = "<group>"; };
+		808A8A92297B1D1700332431 /* AddFeedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFeedModel.swift; sourceTree = "<group>"; };
 		80DB14062978802D00224593 /* RefreshButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshButtonView.swift; sourceTree = "<group>"; };
 		80DFAD5029772B7C006BAED6 /* SignUpMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpMessage.swift; sourceTree = "<group>"; };
 		80DFAD5929772FB9006BAED6 /* RSSFeedItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSSFeedItemModel.swift; sourceTree = "<group>"; };
@@ -96,6 +108,10 @@
 			children = (
 				80FC8744296E065F0060D735 /* Network.swift */,
 				80FC874B296E108F0060D735 /* JsonWebTokenStore.swift */,
+				80128D692978EFF30054C6BD /* Modifiers.swift */,
+				808A8A872979C06A00332431 /* RootModalView.swift */,
+				808A8A892979D38600332431 /* ModalStore.swift */,
+				808A8A90297B1A6100332431 /* URL+Extension.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -107,7 +123,8 @@
 				80DB14062978802D00224593 /* RefreshButtonView.swift */,
 				80DFAD5B29773B7B006BAED6 /* HomeHeaderView.swift */,
 				80DFAD5D29773CE9006BAED6 /* FeedView.swift */,
-				80DB140429786FA800224593 /* EmptyFeedView.swift */,
+				80128D672978E94E0054C6BD /* AlertFormView.swift */,
+				808A8A8E2979EB8700332431 /* HomeFeedView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -125,6 +142,7 @@
 			children = (
 				80FC873F296E005A0060D735 /* RSSFeedModel.swift */,
 				80DFAD5929772FB9006BAED6 /* RSSFeedItemModel.swift */,
+				808A8A92297B1D1700332431 /* AddFeedModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -323,19 +341,25 @@
 			files = (
 				80DFAD5E29773CE9006BAED6 /* FeedView.swift in Sources */,
 				80FC8734296E00380060D735 /* ContentView.swift in Sources */,
+				808A8A8F2979EB8700332431 /* HomeFeedView.swift in Sources */,
+				808A8A93297B1D1700332431 /* AddFeedModel.swift in Sources */,
 				80DFAD5129772B7C006BAED6 /* SignUpMessage.swift in Sources */,
 				80DFAD5C29773B7B006BAED6 /* HomeHeaderView.swift in Sources */,
-				80DB140529786FA800224593 /* EmptyFeedView.swift in Sources */,
+				808A8A91297B1A6100332431 /* URL+Extension.swift in Sources */,
+				808A8A8A2979D38600332431 /* ModalStore.swift in Sources */,
 				80FC8745296E065F0060D735 /* Network.swift in Sources */,
 				80FC8740296E005A0060D735 /* RSSFeedModel.swift in Sources */,
 				8053FE052970691400AE6EB4 /* LoginView.swift in Sources */,
 				80DB14072978802D00224593 /* RefreshButtonView.swift in Sources */,
 				80DFAD5A29772FB9006BAED6 /* RSSFeedItemModel.swift in Sources */,
+				80128D682978E94E0054C6BD /* AlertFormView.swift in Sources */,
 				80FC8743296E01730060D735 /* FeedViewModel.swift in Sources */,
 				8053FE07297089A600AE6EB4 /* HomeView.swift in Sources */,
 				80FC8732296E00380060D735 /* RssReaderApp.swift in Sources */,
+				808A8A882979C06A00332431 /* RootModalView.swift in Sources */,
 				80FC8748296E0A0C0060D735 /* Authentication.swift in Sources */,
 				80FC874C296E108F0060D735 /* JsonWebTokenStore.swift in Sources */,
+				80128D6A2978EFF30054C6BD /* Modifiers.swift in Sources */,
 				80FC874A296E0AC00060D735 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

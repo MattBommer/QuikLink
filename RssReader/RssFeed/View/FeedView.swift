@@ -33,13 +33,7 @@ struct FeedView: View {
             .background(Color.white)
         }
         .padding(.bottom, 8)
-        .cornerRadius(16)
-        .overlay(
-            RoundedRectangle(cornerRadius: 16)
-                .stroke(Color.gray, lineWidth: 0.5)
-        )
-        
-        .padding()
+        .borderedCard(strokeColor: .gray)
     }
     
     private func styleFeedImage(_ image: Image) -> some View {
@@ -60,9 +54,3 @@ struct FeedView_Previews: PreviewProvider {
     }
 }
 
-extension URL {
-    init?(_ urlString: String?) {
-        guard let urlString = urlString else { return nil }
-        self.init(string: urlString)
-    }
-}
