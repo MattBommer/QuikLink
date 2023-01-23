@@ -60,7 +60,7 @@ class JsonWebTokenStore {
 
     }
     
-    internal func deleteStaleTokens() {
+    internal func deleteTokens() {
         try? keychain.removeAll()
     }
     

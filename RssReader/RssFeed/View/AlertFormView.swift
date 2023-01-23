@@ -17,6 +17,7 @@ struct AlertFormView: View {
         VStack(spacing: 16) {
             TextField("Enter URL of valid RSS feed:", text: $feedUrl)
                 .padding()
+                .disableAutocorrection(true)
                 .overlay(
                     RoundedRectangle(cornerRadius: 8)
                         .stroke(.blue, lineWidth: 1)
@@ -24,7 +25,9 @@ struct AlertFormView: View {
             
             HStack {
                 Button {
-                    feedViewModel.addFeed(feedUrl)
+                    Task {
+                        try await feedViewModel.addFeed(feedUrl)
+                    }
                 } label: {
                     Text("Save")
                         .padding([.leading, .trailing], 24)

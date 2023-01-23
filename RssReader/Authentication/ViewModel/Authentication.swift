@@ -11,6 +11,8 @@ import Foundation
 @MainActor
 class AuthViewModel: ObservableObject {
     
+    static let shared: AuthViewModel = AuthViewModel()
+    
     @Published var status: AuthenticationStatus
     
     enum AuthenticationStatus {
@@ -19,22 +21,15 @@ class AuthViewModel: ObservableObject {
         case notSet
     }
     
-    init() {
+    private init() {
         status = .notSet
         self.refreshAuthenticationStatus()
     }
     
     func refreshAuthenticationStatus() {
-        var authStatus: AuthenticationStatus = .unauthenticated
-        defer { status = authStatus }
-        
-        guard let refreshToken = JsonWebTokenStore.shared.refreshToken else { return }
-        
-        if refreshToken.expired {
-            JsonWebTokenStore.shared.deleteStaleTokens()
-        } else {
-            authStatus = .authenticated
-        }
+        let jwtStore = JsonWebTokenStore.shared
+        guard let _ = jwtStore.accessToken, let refreshToken = jwtStore.refreshToken else { status = .unauthenticated; return; }
+        status = refreshToken.expired ? .unauthenticated : .authenticated
     }
     
     func login(user: User) async throws {
@@ -71,7 +66,7 @@ class AuthViewModel: ObservableObject {
     }
     
     func fetchFreshTokens() async throws {
-        let requestInfo: RequestInfo<EmptyBody> = RequestInfo(path: "refresh", httpMethod: .get)
+        let requestInfo = RequestInfo(path: "refresh", httpMethod: .get)
         guard let urlRequest = Network.shared.buildRequest(from: requestInfo, authToken: .refresh) else { return }
         
         let response: Response<JWTTokens> = try await Network.shared.fetch(request: urlRequest)
@@ -87,7 +82,7 @@ class AuthViewModel: ObservableObject {
     }
     
     func logOut() {
-        JsonWebTokenStore.shared.deleteStaleTokens()
+        JsonWebTokenStore.shared.deleteTokens()
         status = .unauthenticated
     }
 }

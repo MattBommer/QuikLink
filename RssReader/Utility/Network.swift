@@ -65,7 +65,7 @@ struct RequestInfo<T> where T: Codable {
     var headers: HttpHeaders?
     var body: T?
     
-    init(path: String, httpMethod: HTTPMethod, headers: HttpHeaders? = nil, body: T? = nil) {
+    init(path: String, httpMethod: HTTPMethod, headers: HttpHeaders? = nil, body: T?) {
         self.path = path
         self.httpMethod = httpMethod
         self.headers = headers
@@ -96,8 +96,13 @@ public class Network {
         switch httpResponse.statusCode {
         case 200...399:
             print("All is well")
-        case 400...499:
-            print("Client error")
+        case 400:
+            print("Bad response")
+        case 401:
+            try await AuthViewModel.shared.fetchFreshTokens()
+            return try await fetch(request: request)
+        case 402...499:
+            print("Client Error")
         case 500...599:
             print("Server Error")
         default:
@@ -140,5 +145,11 @@ public class Network {
         }
         
         return request
+    }
+}
+
+extension RequestInfo where T == EmptyBody {
+    init(path: String, httpMethod: HTTPMethod, headers: HttpHeaders? = nil) {
+        self.init(path: path, httpMethod: httpMethod, headers: headers, body: nil)
     }
 }

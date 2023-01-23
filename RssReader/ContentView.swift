@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @StateObject var authViewModel = AuthViewModel()
+    @StateObject var authViewModel = AuthViewModel.shared
     
     var body: some View {
         switch authViewModel.status {

@@ -16,6 +16,7 @@ struct RefreshFloatingActionButtonView: View {
                 Spacer()
                 Button {
                     Task {
+                        try await AuthViewModel.shared.fetchFreshTokens()
                         try await feedViewModel.fetchFeeds()
                     }
                 } label: {

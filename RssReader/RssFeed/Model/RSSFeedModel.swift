@@ -10,7 +10,7 @@ struct RSSFeed: Identifiable, Decodable {
     var id: String
     var title: String
     var description: String?
-    var feedUrl: URL?
+    var feedUrl: URL
     var imageUrl: URL?
     
     enum CodingKeys: String, CodingKey {
@@ -21,22 +21,17 @@ struct RSSFeed: Identifiable, Decodable {
         case imageURL
     }
     
-    init(id: String, title: String) {
-        self.id = id
-        self.title = title
-        description = nil
-        feedUrl = nil
-        imageUrl = nil
-    }
     
-    
-    // TODO: Update deocder to throw if we were unable to extract a feed URL. It's critical that we have one.
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         id = try container.decode(String.self, forKey: .resourceId)
         title = try container.decode(String.self, forKey: .title)
+        if let url = URL(string: try container.decode(String.self, forKey: .url)) {
+            feedUrl = url
+        } else {
+            throw URLError(.badURL)
+        }
         description = try container.decode(String?.self, forKey: .description)
-        feedUrl = URL(string: try? container.decode(String?.self, forKey: .url))
-        imageUrl = URL(string: try? container.decode(String?.self, forKey: .imageURL))
+        imageUrl = URL(string: try container.decode(String?.self, forKey: .imageURL))
     }
 }

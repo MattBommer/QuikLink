@@ -8,8 +8,6 @@
 import SwiftUI
 
 struct HomeHeaderView: View {
-    @State private var addFeed: Bool = false
-    @State private var removeFeed: Bool = false
     @State private var logout: Bool = false
     
     @EnvironmentObject private var modalStore: ModalStore
@@ -20,6 +18,7 @@ struct HomeHeaderView: View {
             Button {
                 modalStore.present {
                     AlertFormView()
+                        .environmentObject(rssFeedViewModel)
                 }
             } label: {
                 Image(systemName: "plus")
@@ -34,11 +33,21 @@ struct HomeHeaderView: View {
             
             Spacer()
             
-            Button {
-                removeFeed = true
-            } label: {
-                Image(systemName: "trash.fill")
-                    .headerIconStyle()
+            switch rssFeedViewModel.homeFeedStatus {
+            case .normal:
+                Button {
+                    rssFeedViewModel.homeFeedStatus = .edit
+                } label: {
+                    Image(systemName: "trash.fill")
+                        .headerIconStyle()
+                }
+            case .edit:
+                Button {
+                    rssFeedViewModel.homeFeedStatus = .normal
+                } label: {
+                    Text("Done")
+                        .bold()
+                }
             }
             
             Button {

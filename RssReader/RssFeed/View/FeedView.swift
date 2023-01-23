@@ -9,6 +9,8 @@ import SwiftUI
 
 struct FeedView: View {
     var feed: RSSFeed
+    @EnvironmentObject var rssFeedViewModel: RSSFeedViewModel
+    
     var body: some View {
         VStack {
             AsyncImage(url: feed.imageUrl, scale: 1.0) { phase in
@@ -19,7 +21,7 @@ struct FeedView: View {
                     styleFeedImage(Image(uiImage: UIImage(named: "noimage")!))
                 }
             }
-
+            
             VStack(alignment: .leading) {
                 Text(feed.title)
                     .font(.headline)
@@ -31,6 +33,22 @@ struct FeedView: View {
                     .padding([.leading, .trailing], 16)
             }
             .background(Color.white)
+            
+            if (rssFeedViewModel.homeFeedStatus == .edit) {
+                Button {
+                    rssFeedViewModel.removeFeed(feed.id)
+                } label: {
+                    Text("Remove")
+                        .frame(maxWidth: .infinity)
+                        .foregroundColor(.white)
+                        .padding(8)
+                        .background(
+                            RoundedRectangle(cornerRadius: 8)
+                                .fill(Color.red)
+                        )
+                }
+                .padding()
+            }
         }
         .padding(.bottom, 8)
         .borderedCard(strokeColor: .gray)
@@ -45,12 +63,5 @@ struct FeedView: View {
             .clipped()
     }
     
-}
-
-struct FeedView_Previews: PreviewProvider {
-    static var previews: some View {
-        let exampleFeed = RSSFeed(id: "asgohasdpoguh", title: "The New York Times")
-        FeedView(feed: exampleFeed)
-    }
 }
 

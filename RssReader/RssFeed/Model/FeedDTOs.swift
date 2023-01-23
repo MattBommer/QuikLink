@@ -10,3 +10,7 @@ import Foundation
 struct AddFeed: Codable {
     let feedUrl: String
 }
+
+struct RemoveFeed: Codable {
+    let feedId: String
+}

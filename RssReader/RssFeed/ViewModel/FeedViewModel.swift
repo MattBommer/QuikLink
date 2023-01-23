@@ -7,14 +7,20 @@
 
 import Foundation
 
+enum HomeFeedStatus {
+    case normal
+    case edit
+}
+
 @MainActor
 class RSSFeedViewModel: ObservableObject {
-        
+    
     @Published var feeds: [RSSFeed] = []
-            
+    
+    @Published var homeFeedStatus: HomeFeedStatus = .normal
+    
     func addFeed(_ feedUrl: String) async throws {
-        let body = AddFeed(feedUrl: feedUrl)
-        let requestInfo = RequestInfo(path: "feed/add", httpMethod: .get, body: body)
+        let requestInfo = RequestInfo(path: "feed/add", httpMethod: .post, body: AddFeed(feedUrl: feedUrl.lowercased()))
         guard let request = Network.shared.buildRequest(from: requestInfo, authToken: .access) else { return }
         
         let response: Response<RSSFeed> = try await Network.shared.fetch(request: request)
@@ -29,8 +35,8 @@ class RSSFeedViewModel: ObservableObject {
         }
     }
     
-    func fetchFeeds() async throws {        
-        let requestInfo: RequestInfo<EmptyBody> = RequestInfo(path: "feed/fetch", httpMethod: .get)
+    func fetchFeeds() async throws {
+        let requestInfo = RequestInfo(path: "feed/fetch", httpMethod: .get)
         guard let request = Network.shared.buildRequest(from: requestInfo, authToken: .access) else { return }
         
         let response: Response<[RSSFeed]> = try await Network.shared.fetch(request: request)
@@ -46,7 +52,18 @@ class RSSFeedViewModel: ObservableObject {
     }
     
     func removeFeed(_ feedId: String) {
-        let requestInfo: RequestInfo<String> = RequestInfo(path: "feed/fetch", httpMethod: .get, body: nil)
+        let requestInfo = RequestInfo(path: "feed/remove", httpMethod: .post, body: RemoveFeed(feedId: feedId))
+        guard let request = Network.shared.buildRequest(from: requestInfo, authToken: .access) else { return }
         
+        Task {
+            let _: Response<EmptyBody> = try await Network.shared.fetch(request: request)
+        }
+        
+        for (index, feed) in feeds.enumerated() {
+            if feedId == feed.id {
+                feeds.remove(at: index)
+                break
+            }
+        }
     }
 }
