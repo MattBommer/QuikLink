@@ -99,8 +99,7 @@ public class Network {
         case 400:
             print("Bad response")
         case 401:
-            try await AuthViewModel.shared.fetchFreshTokens()
-            return try await fetch(request: request)
+            print("Re-Auth")
         case 402...499:
             print("Client Error")
         case 500...599:

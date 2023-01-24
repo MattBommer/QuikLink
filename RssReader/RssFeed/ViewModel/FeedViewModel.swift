@@ -15,7 +15,7 @@ enum HomeFeedStatus {
 @MainActor
 class RSSFeedViewModel: ObservableObject {
     
-    @Published var feeds: [RSSFeed] = []
+    @Published var feeds: [FeedMetaData] = []
     
     @Published var homeFeedStatus: HomeFeedStatus = .normal
     
@@ -23,7 +23,7 @@ class RSSFeedViewModel: ObservableObject {
         let requestInfo = RequestInfo(path: "feed/add", httpMethod: .post, body: AddFeed(feedUrl: feedUrl.lowercased()))
         guard let request = Network.shared.buildRequest(from: requestInfo, authToken: .access) else { return }
         
-        let response: Response<RSSFeed> = try await Network.shared.fetch(request: request)
+        let response: Response<FeedMetaData> = try await Network.shared.fetch(request: request)
         
         switch response {
         case .success(let feed):
@@ -39,7 +39,7 @@ class RSSFeedViewModel: ObservableObject {
         let requestInfo = RequestInfo(path: "feed/fetch", httpMethod: .get)
         guard let request = Network.shared.buildRequest(from: requestInfo, authToken: .access) else { return }
         
-        let response: Response<[RSSFeed]> = try await Network.shared.fetch(request: request)
+        let response: Response<[FeedMetaData]> = try await Network.shared.fetch(request: request)
         
         switch response {
         case .success(let feeds):

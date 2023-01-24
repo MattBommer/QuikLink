@@ -8,17 +8,24 @@
 import SwiftUI
 
 struct FeedView: View {
-    var feed: RSSFeed
+    var feed: FeedMetaData
+    @State var isOn: Bool = false
     @EnvironmentObject var rssFeedViewModel: RSSFeedViewModel
     
     var body: some View {
         VStack {
+            NavigationLink(isActive: $isOn) {
+                ArticleFeedView(rssFeed: feed)
+            } label: {
+                EmptyView()
+            }
+            
             AsyncImage(url: feed.imageUrl, scale: 1.0) { phase in
                 switch phase {
                 case .success(let image):
-                    styleFeedImage(image)
+                    image.feedImage()
                 default:
-                    styleFeedImage(Image(uiImage: UIImage(named: "noimage")!))
+                    Image(uiImage: UIImage(named: "noimage")!).feedImage()
                 }
             }
             
@@ -52,16 +59,22 @@ struct FeedView: View {
         }
         .padding(.bottom, 8)
         .borderedCard(strokeColor: .gray)
+        .onTapGesture {
+            isOn.toggle()
+        }
     }
+}
+
+extension Image {
     
-    private func styleFeedImage(_ image: Image) -> some View {
-        return image
+    func feedImage() -> some View {
+        return self
             .resizable()
             .scaledToFill()
             .frame(maxWidth: .infinity)
             .frame(height: 150)
             .clipped()
     }
-    
 }
+
 

@@ -22,14 +22,16 @@ struct HomeFeedView: View {
             }
             .foregroundColor(.gray)
         } else {
-            VStack {
-                ScrollView {
-                    LazyVStack {
-                        ForEach(rssFeedViewModel.feeds) { feed in
-                            FeedView(feed: feed)
+            NavigationView {
+                VStack {
+                    ScrollView {
+                        LazyVStack {
+                            ForEach(rssFeedViewModel.feeds) { feed in
+                                FeedView(feed: feed)
+                            }
                         }
+                        .padding([.leading, .trailing], 16)
                     }
-                    .padding([.leading, .trailing], 16)
                 }
             }
         }

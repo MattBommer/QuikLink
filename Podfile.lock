@@ -1,20 +1,24 @@
 PODS:
+  - FeedKit (9.1.2)
   - JWTDecode (3.0.0)
   - KeychainAccess (4.2.2)
 
 DEPENDENCIES:
+  - FeedKit (~> 9.1.2)
   - JWTDecode (~> 3.0)
   - KeychainAccess (~> 4.2)
 
 SPEC REPOS:
   trunk:
+    - FeedKit
     - JWTDecode
     - KeychainAccess
 
 SPEC CHECKSUMS:
+  FeedKit: 71653273ab08e618cd6fd1301ca08fc02dca6a9e
   JWTDecode: 82480a7173f8a811954e7e14a2b59f688ca4222a
   KeychainAccess: c0c4f7f38f6fc7bbe58f5702e25f7bd2f65abf51
 
-PODFILE CHECKSUM: 5214e65ac89e1873536ef9976f27fdf770a3cd91
+PODFILE CHECKSUM: c5ca98fffcf2aa2cc879d5ddeea77b8888887ab6
 
 COCOAPODS: 1.11.3

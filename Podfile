@@ -8,5 +8,6 @@ target 'RssReader' do
   # Pods for RssReader
   pod 'KeychainAccess', '~> 4.2'
   pod 'JWTDecode', '~> 3.0'
+  pod 'FeedKit', '~> 9.1.2'
 
 end
