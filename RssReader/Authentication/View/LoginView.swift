@@ -9,16 +9,26 @@ import SwiftUI
 
 struct LoginView: View {
     @ObservedObject var authViewModel: AuthViewModel
+    @StateObject var loginViewModel = LoginViewModel()
     
-    @State private var userAction: UserAction = .login
-    @State var username: String = ""
-    @State var password: String = ""
-    @State var verifyPassword: String = ""
-    
-    var user: User {
-        User(username: username, password: password)
+    private var subtitleText: String {
+        switch loginViewModel.formType {
+        case .login:
+            return "Forgot your password?"
+        case .signUp:
+            return "Already have an account? Click here."
+        }
     }
     
+    private var captionButtonAction: () {
+        switch loginViewModel.formType {
+        case .login:
+            print("Forgot password flow") //TODO: Don't think I will do this
+        case .signUp:
+            loginViewModel.formType = .login
+        }
+    }
+        
     var body: some View {
         VStack(spacing: 32) {
             Image(uiImage: UIImage(named: "logo")!)
@@ -26,19 +36,14 @@ struct LoginView: View {
                 .frame(width: 200, height: 200)
                 .cornerRadius(8)
             
-            VStack(spacing: 8) {
-                EmailTextField(email: $username)
-                PasswordTextField(placeholder: "Password", password: $password)
-                if userAction == .signUp {
-                    PasswordTextField(placeholder: "Retype Password", password: $verifyPassword)
-                }
-            }
+            UserFormView(loginViewModel: loginViewModel)
             
             VStack(spacing: 40) {
                 VStack {
                     StretchButton {
                         Task {
-                            switch userAction {
+                            guard let user = loginViewModel.getUser() else { return }
+                            switch loginViewModel.formType {
                             case .login:
                                 try await authViewModel.login(user: user)
                             case .signUp:
@@ -46,46 +51,34 @@ struct LoginView: View {
                             }
                         }
                     } label: {
-                            Text(userAction.rawValue)
+                        Text(loginViewModel.formType.rawValue)
                             .fontWeight(.semibold)
                             .foregroundColor(.white)
                     }
                     .fill(backgroundColor: .brandBlue)
-
+                    
                     Button {
-                        switch userAction {
-                        case .login:
-                            print("Forgot password flow") //TODO: Don't think I will do this
-                        case .signUp:
-                            userAction = .login
-                        }
+                        captionButtonAction
                     } label: {
-                        switch userAction {
-                        case .login:
-                            Text("Forgot your password?")
-                                .font(.callout)
-                                .foregroundColor(.gray)
-                        case .signUp:
-                            Text("Already have an account? Login here")
-                                .font(.callout)
-                                .foregroundColor(.gray)
-                        }
+                        Text(subtitleText)
+                            .font(.callout)
+                            .foregroundColor(.gray)
                     }
                     .padding(4)
-
+                    
                 }
                 
                 VStack {
                     Text("Don't have a QuikLink account?")
                     StretchButton {
-                        userAction = .signUp
+                        loginViewModel.formType = .signUp
                     } label: {
                         Text("Create new account")
                             .foregroundColor(Color(uiColor: .brandBlue))
                     }
                     .outline(backgroundColor: .brandWhite, strokeColor: .brandBlue)
                 }
-                .isHidden(userAction == .signUp)
+                .isHidden(loginViewModel.formType == .signUp)
             }
             
             Spacer()
@@ -107,10 +100,8 @@ struct LoginView_Previews: PreviewProvider {
 
 extension View {
     @ViewBuilder
-    func isHidden(_ hide: Bool, hideInPlace: Bool = true) -> some View {
-        if hideInPlace {
-            self.opacity(hide ? 0.0 : 1.0)
-        } else if hide {
+    func isHidden(_ hide: Bool) -> some View {
+        if hide {
             self.hidden()
         } else {
             self
