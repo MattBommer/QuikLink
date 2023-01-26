@@ -17,6 +17,7 @@
 		80883C702981AD9A00BCECC6 /* UserFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80883C6F2981AD9A00BCECC6 /* UserFormView.swift */; };
 		80883C722981BD8100BCECC6 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80883C712981BD8100BCECC6 /* LoginViewModel.swift */; };
 		80883C74298313EA00BCECC6 /* GradientLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80883C73298313EA00BCECC6 /* GradientLoadingView.swift */; };
+		80883C7629831C7800BCECC6 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80883C7529831C7800BCECC6 /* ProfileView.swift */; };
 		808A8A882979C06A00332431 /* RootModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808A8A872979C06A00332431 /* RootModalView.swift */; };
 		808A8A8A2979D38600332431 /* ModalStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808A8A892979D38600332431 /* ModalStore.swift */; };
 		808A8A91297B1A6100332431 /* URL+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808A8A90297B1A6100332431 /* URL+Extension.swift */; };
@@ -51,6 +52,7 @@
 		80883C6F2981AD9A00BCECC6 /* UserFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFormView.swift; sourceTree = "<group>"; };
 		80883C712981BD8100BCECC6 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		80883C73298313EA00BCECC6 /* GradientLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientLoadingView.swift; sourceTree = "<group>"; };
+		80883C7529831C7800BCECC6 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		808A8A872979C06A00332431 /* RootModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootModalView.swift; sourceTree = "<group>"; };
 		808A8A892979D38600332431 /* ModalStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalStore.swift; sourceTree = "<group>"; };
 		808A8A90297B1A6100332431 /* URL+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Extension.swift"; sourceTree = "<group>"; };
@@ -145,6 +147,7 @@
 				809FD94A2980339C0054D45D /* ArticleView.swift */,
 				809FD94C2980383E0054D45D /* WebView.swift */,
 				80883C73298313EA00BCECC6 /* GradientLoadingView.swift */,
+				80883C7529831C7800BCECC6 /* ProfileView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -382,6 +385,7 @@
 				809FD94B2980339C0054D45D /* ArticleView.swift in Sources */,
 				8053FE07297089A600AE6EB4 /* HomeView.swift in Sources */,
 				80FC8732296E00380060D735 /* RssReaderApp.swift in Sources */,
+				80883C7629831C7800BCECC6 /* ProfileView.swift in Sources */,
 				808A8A882979C06A00332431 /* RootModalView.swift in Sources */,
 				80FC8748296E0A0C0060D735 /* Authentication.swift in Sources */,
 				80883C74298313EA00BCECC6 /* GradientLoadingView.swift in Sources */,

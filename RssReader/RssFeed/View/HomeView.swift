@@ -11,7 +11,7 @@ struct HomeView: View {
     @StateObject private var rssFeedViewModel = RSSFeedViewModel()
     @State private var headerHeight: CGFloat = 0
     
-    let articles: [Article] = [.sample]
+    let articles: [Article] = [.sample, .sample2]
     
     var body: some View {
         RootModalView(backgroundColor: Color(uiColor: .gray.withAlphaComponent(0.3))) {

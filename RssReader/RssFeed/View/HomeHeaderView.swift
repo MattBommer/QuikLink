@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct HomeHeaderView: View {
+    @State private var manageFeedsPressed: Bool = false
+    @State private var profilePressed: Bool = false
+    
     var body: some View {
         HStack {
             Button {
@@ -25,7 +28,7 @@ struct HomeHeaderView: View {
             Spacer()
             
             Button {
-                print("Profile Settings")
+                profilePressed = true
             } label: {
                 Image(systemName: "person")
                     .headerIconStyle()
@@ -34,6 +37,12 @@ struct HomeHeaderView: View {
         }
         .foregroundColor(Color(uiColor: .brandWhite))
         .background(Color(uiColor: .brandPurple), ignoresSafeAreaEdges: .top)
+        .sheet(isPresented: $profilePressed) {
+            profilePressed = false
+        } content: {
+            ProfileView()
+        }
+
     }
 }
 
