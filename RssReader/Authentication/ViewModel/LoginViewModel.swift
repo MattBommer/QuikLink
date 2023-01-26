@@ -9,9 +9,22 @@ import Foundation
 
 class LoginViewModel: ObservableObject {
     
+    @Published var formType: VerificationFormType = .login
     
+    @Published var formInputError: UserFormValidationError?
     
-    enum UserFormValidationErrors {
+    @Published var email: String = ""
+    
+    @Published var password: String = ""
+    
+    @Published var retypePassword: String = ""
+    
+    enum VerificationFormType: String {
+        case login = "Login"
+        case signUp = "Sign Up"
+    }
+    
+    enum UserFormValidationError: Error {
         case invalidEmail
         case passwordTooShort
         case passwordTooLong
@@ -31,27 +44,40 @@ class LoginViewModel: ObservableObject {
         }
     }
     
-    func validateEmail(_ email: String) {
+    func getUser() -> User? {
+        do {
+            try validateEmail(email)
+            try validatePassword(password)
+            try validateBothPasswords(password, password)
+        } catch {
+            formInputError = error as? UserFormValidationError
+            return nil
+        }
+        
+        return User(username: email, password: password)
+    }
+    
+    func validateEmail(_ email: String) throws {
         let emailSplit = email.split(separator: "@")
-        let isValid = email.contains("@") && emailSplit.count == 2 && emailSplit.last?.split(separator: ".").count == 2
-        userFormValidationError = !isValid ? .invalidEmail : nil
+        if !(email.contains("@") && emailSplit.count == 2 && emailSplit.last?.split(separator: ".").count == 2) {
+            throw UserFormValidationError.invalidEmail
+        }
     }
     
-    func validatePassword(_ password: String) {
+    func validatePassword(_ password: String) throws {
         if password.count < 8 {
-            userFormValidationError = .passwordTooShort
+            throw UserFormValidationError.passwordTooShort
         } else if password.count > 254 {
-            userFormValidationError = .passwordTooLong
-        } else {
-            userFormValidationError = nil
+            throw UserFormValidationError.passwordTooLong
         }
     }
     
-    func validateBothPasswords(_ password: String, _ password2: String) {
+    func validateBothPasswords(_ password: String, _ password2: String) throws {
+        guard formType == .signUp else { return }
         if password != password2 {
-            userFormValidationError = .passwordsDoNotMatch
-        } else {
-            userFormValidationError = nil
+            throw UserFormValidationError.passwordsDoNotMatch
         }
     }
+    
+    
 }

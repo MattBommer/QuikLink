@@ -58,22 +58,9 @@ struct FeedView: View {
             }
         }
         .padding(.bottom, 8)
-        .borderedCard(strokeColor: .gray)
         .onTapGesture {
             isOn.toggle()
         }
-    }
-}
-
-extension Image {
-    
-    func feedImage() -> some View {
-        return self
-            .resizable()
-            .scaledToFill()
-            .frame(maxWidth: .infinity)
-            .frame(height: 150)
-            .clipped()
     }
 }
 

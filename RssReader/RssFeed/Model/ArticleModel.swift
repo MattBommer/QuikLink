@@ -54,4 +54,7 @@ struct Article: Identifiable {
         self.description = description
         self.imageUrl = URL(string: imageUrl)
     }
+    
+    
+    static let sample: Article = try! Article(id: "https://www.reddit.com", title: "Reddit", description: "The front page of the internet", contentUrl: "https://www.reddit.com", imageUrl: "https://martech.org/wp-content/uploads/2014/07/reddit-1920-800x450.png")
 }

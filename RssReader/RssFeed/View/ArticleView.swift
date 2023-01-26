@@ -24,7 +24,7 @@ struct ArticleView: View {
             
             VStack(alignment: .leading) {
                 Text(article.title)
-                    .font(.headline)
+                    .font(.title)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding([.leading, .trailing], 16)
                 
@@ -35,17 +35,30 @@ struct ArticleView: View {
                         .padding([.leading, .trailing], 16)
                 }
             }
-            .background(Color.white)
         }
         .padding(.bottom, 8)
-        .borderedCard(strokeColor: .gray)
         .onTapGesture {
             showWebView = true
         }
         .sheet(isPresented: $showWebView, onDismiss: {
             showWebView = false
         }) {
-            WebView(url: article.contentUrl)
+            ArticleWebView(url: article.contentUrl)
         }
+        .background(Color(uiColor: .brandWhite))
+        .cornerRadius(8)
+        .shadow(color: Color(uiColor: .black.withAlphaComponent(0.2)), radius: 2, x: 0, y: 2)
+    }
+}
+
+extension Image {
+    
+    func feedImage() -> some View {
+        return self
+            .resizable()
+            .scaledToFill()
+            .frame(maxWidth: .infinity)
+            .frame(height: 150)
+            .clipped()
     }
 }

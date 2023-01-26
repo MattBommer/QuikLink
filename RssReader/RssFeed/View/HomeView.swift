@@ -11,26 +11,24 @@ struct HomeView: View {
     @StateObject private var rssFeedViewModel = RSSFeedViewModel()
     @State private var headerHeight: CGFloat = 0
     
+    let articles: [Article] = [.sample]
+    
     var body: some View {
         RootModalView(backgroundColor: Color(uiColor: .gray.withAlphaComponent(0.3))) {
-            ZStack {
-                GeometryReader { reader in
-                    VStack(spacing: -8) {
-                        HomeHeaderView()
-                            .frame(width: reader.size.width, height: reader.size.height * 0.15)
-                        HomeFeedView()
-                            .frame(width: reader.size.width, height: reader.size.height * 0.85)
+            VStack(spacing: 0) {
+                HomeHeaderView()
+                
+                // Feed
+                ScrollView {
+                    LazyVStack {
+                        ForEach(articles, id: \.id) { article in
+                            ArticleView(article: article)
+                        }
                     }
+                    .padding([.top], 8)
+                    .padding([.leading, .trailing], 16)
                 }
-                .ignoresSafeArea()
-                .onAppear {
-                    Task {
-                        try await rssFeedViewModel.fetchFeeds()
-                    }
-                }
-                RefreshFloatingActionButtonView()
             }
-            .environmentObject(rssFeedViewModel)
         }
     }
 }

@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-struct BorderedCard: ViewModifier {
-    var backgroundColor: Color
-    var strokeColor: Color
+struct StrokeView: ViewModifier {
+    var backgroundColor: UIColor
+    var strokeColor: UIColor
     var lineWidth: CGFloat
     var cornerRadius: CGFloat
 
@@ -17,14 +17,34 @@ struct BorderedCard: ViewModifier {
         content
             .background(
                 RoundedRectangle(cornerRadius: cornerRadius)
-                    .fill(backgroundColor)
+                    .fill(Color(uiColor: backgroundColor))
             )
-            .border(strokeColor, width: lineWidth)
+            .overlay(
+                RoundedRectangle(cornerRadius: cornerRadius)
+                    .stroke(Color(uiColor: strokeColor), lineWidth: lineWidth)
+            )
+    }
+}
+
+struct Fill: ViewModifier {
+    var backgroundColor: UIColor
+    var cornerRadius: CGFloat
+
+    func body(content: Content) -> some View {
+        content
+            .background(
+                RoundedRectangle(cornerRadius: cornerRadius)
+                    .fill(Color(uiColor: backgroundColor))
+            )
     }
 }
 
 extension View {
-    func borderedCard(backgroundColor: Color = .white, strokeColor: Color = .blue, lineWidth: CGFloat = 1, cornerRadius: CGFloat = 9) -> some View {
-        modifier(BorderedCard(backgroundColor: backgroundColor, strokeColor: strokeColor, lineWidth: lineWidth, cornerRadius: cornerRadius))
+    func outline(backgroundColor: UIColor = .white, strokeColor: UIColor = .blue, lineWidth: CGFloat = 1, cornerRadius: CGFloat = 8) -> some View {
+        modifier(StrokeView(backgroundColor: backgroundColor, strokeColor: strokeColor, lineWidth: lineWidth, cornerRadius: cornerRadius))
+    }
+    
+    func fill(backgroundColor: UIColor, cornerRadius: CGFloat = 8) -> some View {
+        modifier(Fill(backgroundColor: backgroundColor, cornerRadius: cornerRadius))
     }
 }

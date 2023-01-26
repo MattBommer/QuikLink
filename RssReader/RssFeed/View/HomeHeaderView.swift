@@ -8,72 +8,39 @@
 import SwiftUI
 
 struct HomeHeaderView: View {
-    @State private var logout: Bool = false
-    
-    @EnvironmentObject private var modalStore: ModalStore
-    @EnvironmentObject private var rssFeedViewModel: RSSFeedViewModel
-    @EnvironmentObject private var AuthViewModel: AuthViewModel
     var body: some View {
         HStack {
             Button {
-                modalStore.present {
-                    AlertFormView()
-                        .environmentObject(rssFeedViewModel)
-                }
+                print("Manage feeds")
             } label: {
-                Image(systemName: "plus")
+                Image(systemName: "square.stack.3d.up")
                     .headerIconStyle()
             }
             
             Spacer()
             
-            Text("Real Simple Syndication")
+            Text("QuikLink")
                 .font(.title)
-                .padding()
             
             Spacer()
-            
-            switch rssFeedViewModel.homeFeedStatus {
-            case .normal:
-                Button {
-                    rssFeedViewModel.homeFeedStatus = .edit
-                } label: {
-                    Image(systemName: "trash.fill")
-                        .headerIconStyle()
-                }
-            case .edit:
-                Button {
-                    rssFeedViewModel.homeFeedStatus = .normal
-                } label: {
-                    Text("Done")
-                        .bold()
-                }
-            }
             
             Button {
-                logout = true
+                print("Profile Settings")
             } label: {
-                Image(systemName: "arrow.up.right.diamond")
+                Image(systemName: "person")
                     .headerIconStyle()
-            }.confirmationDialog("Are you sure you want to logout", isPresented: $logout) {
-                Button("Logout", role: .destructive) {
-                    AuthViewModel.logOut()
-                }
-                Button("Cancel", role: .cancel) {
-                    logout = false
-                }
             }
+
         }
-        .foregroundColor(.white)
-        .background(Color.blue)
-        .shadow(radius: 4)
+        .foregroundColor(Color(uiColor: .brandWhite))
+        .background(Color(uiColor: .brandPurple), ignoresSafeAreaEdges: .top)
     }
 }
 
 private extension Image {
     
     func headerIconStyle() -> some View {
-        self.resizable()
+        resizable()
             .frame(width: 20, height: 20, alignment: .center)
             .padding()
     }

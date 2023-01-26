@@ -54,7 +54,6 @@ struct AlertFormView: View {
             }
         }
         .padding(24)
-        .borderedCard()
         .padding()
     }
 }
