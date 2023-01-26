@@ -16,15 +16,18 @@ struct ArticleView: View {
             AsyncImage(url: article.imageUrl, scale: 1.0) { phase in
                 switch phase {
                 case .success(let image):
-                    image.feedImage()
+                    image.resizable()
+                        .scaledToFill()
                 default:
-                    Image(uiImage: UIImage(named: "noimage")!).feedImage()
+                    GradientLoadingView()
                 }
             }
+            .frame(height: 150)
+            .clipped()
             
             VStack(alignment: .leading) {
                 Text(article.title)
-                    .font(.title)
+                    .font(.title2)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding([.leading, .trailing], 16)
                 
@@ -47,7 +50,7 @@ struct ArticleView: View {
         }
         .background(Color(uiColor: .brandWhite))
         .cornerRadius(8)
-        .shadow(color: Color(uiColor: .black.withAlphaComponent(0.2)), radius: 2, x: 0, y: 2)
+        .shadow(color: Color(uiColor: .black.withAlphaComponent(0.2)), radius: 4, x: 0, y: 2)
     }
 }
 
@@ -55,10 +58,6 @@ extension Image {
     
     func feedImage() -> some View {
         return self
-            .resizable()
-            .scaledToFill()
-            .frame(maxWidth: .infinity)
-            .frame(height: 150)
-            .clipped()
+        
     }
 }
