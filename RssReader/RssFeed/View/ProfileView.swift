@@ -20,6 +20,7 @@ struct ProfileView: View {
                     .padding([.top, .bottom])
                     .background(Color(uiColor: .brandRed))
                     .foregroundColor(Color(uiColor: .brandWhite))
+                    .cornerRadius(8)
             }
             .padding([.leading, .trailing])
 

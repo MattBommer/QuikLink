@@ -9,9 +9,6 @@ import SwiftUI
 
 struct HomeView: View {
     @StateObject private var rssFeedViewModel = RSSFeedViewModel()
-    @State private var headerHeight: CGFloat = 0
-    
-    let articles: [Article] = [.sample, .sample2]
     
     var body: some View {
         RootModalView(backgroundColor: Color(uiColor: .gray.withAlphaComponent(0.3))) {
@@ -20,14 +17,19 @@ struct HomeView: View {
                 
                 // Feed
                 ScrollView {
-                    LazyVStack {
-                        ForEach(articles, id: \.id) { article in
+                    LazyVStack (spacing: 16) {
+                        ForEach(rssFeedViewModel.articles, id: \.id) { article in
                             ArticleView(article: article)
                         }
                     }
                     .padding([.top], 8)
                     .padding([.leading, .trailing], 16)
                 }
+            }
+        }
+        .onAppear {
+            Task {
+                try await rssFeedViewModel.fetchFeeds()
             }
         }
     }

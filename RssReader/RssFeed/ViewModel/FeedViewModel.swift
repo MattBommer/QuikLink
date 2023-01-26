@@ -6,19 +6,17 @@
 //
 
 import Foundation
+import FeedKit
 
-enum HomeFeedStatus {
-    case normal
-    case edit
-}
+
 
 @MainActor
 class RSSFeedViewModel: ObservableObject {
     
     @Published var feeds: [FeedMetaData] = []
     
-    @Published var homeFeedStatus: HomeFeedStatus = .normal
-    
+    @Published var articles: [Article] = []
+        
     func addFeed(_ feedUrl: String) async throws {
         let requestInfo = RequestInfo(path: "feed/add", httpMethod: .post, body: AddFeed(feedUrl: feedUrl.lowercased()))
         guard let request = Network.shared.buildRequest(from: requestInfo, authToken: .access) else { return }
@@ -35,6 +33,34 @@ class RSSFeedViewModel: ObservableObject {
         }
     }
     
+    func parseFeeds(_ feeds: [FeedMetaData]) {
+        let parsers = feeds.map { FeedParser(URL: $0.feedUrl) }
+        parsers.forEach { parser in
+            parser.parseAsync { result in
+                var articles: [Article]?
+                switch result {
+                case .success(let feed):
+                    switch feed {
+                    case .atom(let atomFeed):
+                        guard let entries = atomFeed.entries else { return }
+                        articles = entries.compactMap { Article(atomEntry: $0) }
+                    case .rss(let rssFeed):
+                        guard let items = rssFeed.items else { return }
+                        articles = items.compactMap { Article(rssItem: $0) }
+                    case .json(let jsonFeed):
+                        guard let items = jsonFeed.items else { return }
+                        articles = items.compactMap { Article(jsonItem: $0) }
+                    }
+                case .failure(let error):
+                    print(error)
+                }
+                
+                guard let articles = articles else { return }
+                DispatchQueue.main.async { self.articles += articles }
+            }
+        }
+    }
+    
     func fetchFeeds() async throws {
         let requestInfo = RequestInfo(path: "feed/fetch", httpMethod: .get)
         guard let request = Network.shared.buildRequest(from: requestInfo, authToken: .access) else { return }
@@ -43,6 +69,7 @@ class RSSFeedViewModel: ObservableObject {
         
         switch response {
         case .success(let feeds):
+            parseFeeds(feeds)
             await MainActor.run(body: {
                 self.feeds = feeds
             })
@@ -50,6 +77,8 @@ class RSSFeedViewModel: ObservableObject {
             print(message)
         }
     }
+    
+    
     
     func removeFeed(_ feedId: String) {
         let requestInfo = RequestInfo(path: "feed/remove", httpMethod: .post, body: RemoveFeed(feedId: feedId))

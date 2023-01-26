@@ -6,7 +6,7 @@
 //
 import Foundation
 
-struct FeedMetaData: Identifiable, Decodable {
+struct FeedMetaData: Identifiable, Decodable, Hashable {
     var id: String
     var title: String
     var description: String?
