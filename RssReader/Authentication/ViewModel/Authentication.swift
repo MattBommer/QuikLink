@@ -22,6 +22,7 @@ class AuthViewModel: ObservableObject {
     init() {
         status = .notSet
         self.refreshAuthenticationStatus()
+        Network.shared.authenticationDelegate = self
     }
     
     func refreshAuthenticationStatus() {
@@ -31,23 +32,16 @@ class AuthViewModel: ObservableObject {
     }
     
     func login(user: User) async throws {
-        let requestInfo = RequestInfo(path: "login", httpMethod: .post, body: user)
+        let requestInfo = RequestInfo(path: "login", httpMethod: .post, body: user, needsAuthorizationToken: false)
         guard let urlRequest = Network.shared.buildRequest(from: requestInfo) else { return }
         
-        let response: Response<JWTTokens> = try await Network.shared.fetch(request: urlRequest)
-        
-        switch response {
-        case .success(let tokens):
-            try JsonWebTokenStore.shared.setTokens(tokens)
-        default:
-            break
-        }
+        let _: Response<EmptyBody> = try await Network.shared.fetch(request: urlRequest)
         
         await MainActor.run(body: { refreshAuthenticationStatus() })
     }
     
     func signUp(user: User) async throws -> String? {
-        let requestInfo = RequestInfo(path: "signup", httpMethod: .post, body: user)
+        let requestInfo = RequestInfo(path: "signup", httpMethod: .post, body: user, needsAuthorizationToken: false)
         guard let urlRequest = Network.shared.buildRequest(from: requestInfo) else { return nil }
 
         let response: Response<SignUpMessage> = try await Network.shared.fetch(request: urlRequest)
@@ -61,22 +55,6 @@ class AuthViewModel: ObservableObject {
         }
         
         return result
-    }
-    
-    func fetchFreshTokens() async throws {
-        let requestInfo = RequestInfo(path: "refresh", httpMethod: .get)
-        guard let urlRequest = Network.shared.buildRequest(from: requestInfo, authToken: .refresh) else { return }
-        
-        let response: Response<JWTTokens> = try await Network.shared.fetch(request: urlRequest)
-        
-        switch response {
-        case .success(let tokens):
-            try JsonWebTokenStore.shared.setTokens(tokens)
-        default:
-            break
-        }
-        
-        await MainActor.run(body: { refreshAuthenticationStatus() })
     }
     
     func logOut() {

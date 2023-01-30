@@ -18,8 +18,8 @@ class RSSFeedViewModel: ObservableObject {
     @Published var articles: [Article] = []
         
     func addFeed(_ feedUrl: String) async throws {
-        let requestInfo = RequestInfo(path: "feed/add", httpMethod: .post, body: AddFeed(feedUrl: feedUrl.lowercased()))
-        guard let request = Network.shared.buildRequest(from: requestInfo, authToken: .access) else { return }
+        let requestInfo = RequestInfo(path: "feed/add", httpMethod: .post, body: AddFeed(feedUrl: feedUrl.lowercased()), needsAuthorizationToken: true)
+        guard let request = Network.shared.buildRequest(from: requestInfo) else { return }
         
         let response: Response<FeedMetaData> = try await Network.shared.fetch(request: request)
         
@@ -62,8 +62,8 @@ class RSSFeedViewModel: ObservableObject {
     }
     
     func fetchFeeds() async throws {
-        let requestInfo = RequestInfo(path: "feed/fetch", httpMethod: .get)
-        guard let request = Network.shared.buildRequest(from: requestInfo, authToken: .access) else { return }
+        let requestInfo = RequestInfo(path: "feed/fetch", httpMethod: .get, needsAuthorizationToken: true)
+        guard let request = Network.shared.buildRequest(from: requestInfo) else { return }
         
         let response: Response<[FeedMetaData]> = try await Network.shared.fetch(request: request)
         
@@ -81,8 +81,8 @@ class RSSFeedViewModel: ObservableObject {
     
     
     func removeFeed(_ feedId: String) {
-        let requestInfo = RequestInfo(path: "feed/remove", httpMethod: .post, body: RemoveFeed(feedId: feedId))
-        guard let request = Network.shared.buildRequest(from: requestInfo, authToken: .access) else { return }
+        let requestInfo = RequestInfo(path: "feed/remove", httpMethod: .post, body: RemoveFeed(feedId: feedId), needsAuthorizationToken: true)
+        guard let request = Network.shared.buildRequest(from: requestInfo) else { return }
         
         Task {
             let _: Response<EmptyBody> = try await Network.shared.fetch(request: request)

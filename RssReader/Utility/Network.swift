@@ -12,13 +12,9 @@ typealias HttpHeaderField = String
 typealias HttpHeaders = [HttpHeaderField: HeaderValue]
 
 enum ResponseError: Error {
-    case unknownStatus
-}
-
-enum AuthTokenType {
-    case access
-    case refresh
-    case none
+    case clientError
+    case serverError
+    case unknownError
 }
 
 public enum Response<T>: Decodable where T: Decodable {
@@ -59,17 +55,26 @@ public enum HTTPMethod: String {
 
 public struct EmptyBody: Codable {}
 
-struct RequestInfo<T> where T: Codable {
+struct RequestInfo {
     var path: String
     var httpMethod: HTTPMethod
     var headers: HttpHeaders?
-    var body: T?
+    var body: Data?
+    var needsAuthorizationToken: Bool
     
-    init(path: String, httpMethod: HTTPMethod, headers: HttpHeaders? = nil, body: T?) {
+    init<T>(path: String, httpMethod: HTTPMethod, headers: HttpHeaders? = nil, body: T, needsAuthorizationToken: Bool) where T : Encodable {
         self.path = path
         self.httpMethod = httpMethod
         self.headers = headers
-        self.body = body
+        self.body = try? JSONEncoder().encode(body)
+        self.needsAuthorizationToken = needsAuthorizationToken
+    }
+    
+    init(path: String, httpMethod: HTTPMethod, headers: HttpHeaders? = nil, needsAuthorizationToken: Bool) {
+        self.path = path
+        self.httpMethod = httpMethod
+        self.headers = headers
+        self.needsAuthorizationToken = needsAuthorizationToken
     }
 }
 
@@ -77,10 +82,12 @@ public class Network {
     
     static let shared: Network = Network()
     
+    weak var authenticationDelegate: AuthViewModel?
+    
     private let encoder: JSONEncoder
     
     private let decoder: JSONDecoder
-    
+        
     private let baseURL: URL?
     
     private init() {
@@ -93,40 +100,42 @@ public class Network {
         let (data, response) = try await URLSession.shared.data(for: request, delegate: nil)
         let httpResponse = response as! HTTPURLResponse
         
-        switch httpResponse.statusCode {
-        case 200...399:
-            print("All is well")
-        case 400:
-            print("Bad response")
-        case 401:
-            print("Re-Auth")
-        case 402...499:
-            print("Client Error")
-        case 500...599:
-            print("Server Error")
-        default:
-            print("Unknown Error")
+        if let accessToken = httpResponse.value(forHTTPHeaderField: "access-token"),
+           let refreshToken = httpResponse.value(forHTTPHeaderField: "refresh-token")
+        {
+            try JsonWebTokenStore.shared.setTokens(JWTTokens(refresh: refreshToken, access: accessToken))
         }
         
-        let decoded = try decoder.decode(Response<T>.self, from: data)
-        return decoded
+        switch httpResponse.statusCode {
+        case 200...399:
+            let decoded = try decoder.decode(Response<T>.self, from: data)
+            return decoded
+        case 401:
+            // Log user out
+            DispatchQueue.main.async { self.authenticationDelegate?.logOut() }
+            throw ResponseError.clientError
+        case 400, 402...499:
+            throw ResponseError.clientError
+            // Inform user that they filled something out wrong
+        case 500...599:
+            throw ResponseError.serverError
+            // Problem on server side, tell user server is not working and to try again later
+        default:
+            throw ResponseError.unknownError
+        }
     }
     
-    func buildRequest<T>(from requestInfo: RequestInfo<T>, authToken: AuthTokenType = .none) -> URLRequest? {
+    func buildRequest(from requestInfo: RequestInfo) -> URLRequest? {
         guard let url = URL(string: requestInfo.path, relativeTo: baseURL) else { return nil }
-        var request = URLRequest(url: url)
+        var request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData)
         request.httpMethod = requestInfo.httpMethod.rawValue.capitalized
+        request.httpBody = requestInfo.body
         
         request.setValue("application/json", forHTTPHeaderField: "content-type")
         request.setValue("application/json", forHTTPHeaderField: "accept")
         
-        switch authToken {
-        case .access where JsonWebTokenStore.shared.accessToken != nil:
-            request.setValue("bearer \(JsonWebTokenStore.shared.accessToken!.string)", forHTTPHeaderField: "authorization")
-        case .refresh where JsonWebTokenStore.shared.refreshToken != nil:
-            request.setValue("bearer \(JsonWebTokenStore.shared.refreshToken!.string)", forHTTPHeaderField: "authorization")
-        default:
-            break
+        if requestInfo.needsAuthorizationToken, let token = JsonWebTokenStore.shared.fetchValidToken() {
+            request.setValue("bearer \(token.string)", forHTTPHeaderField: "authorization")
         }
         
         if let headers = requestInfo.headers {
@@ -135,20 +144,6 @@ public class Network {
             }
         }
         
-        guard let body = requestInfo.body else { return request }
-        do {
-            let bodyData = try encoder.encode(body)
-            request.httpBody = bodyData
-        } catch {
-            print(error)
-        }
-        
         return request
-    }
-}
-
-extension RequestInfo where T == EmptyBody {
-    init(path: String, httpMethod: HTTPMethod, headers: HttpHeaders? = nil) {
-        self.init(path: path, httpMethod: httpMethod, headers: headers, body: nil)
     }
 }

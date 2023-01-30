@@ -42,7 +42,7 @@ class JsonWebTokenStore {
     
     var refreshToken: JWT? {
         get {
-           retrieveToken(key: "refreshToken")
+            retrieveToken(key: "refreshToken")
         }
     }
     
@@ -51,17 +51,25 @@ class JsonWebTokenStore {
     internal func setTokens(_ tokens: JWTTokens?) throws {
         guard let tokens = tokens else { return }
         
-        do {
-            try keychain.set(tokens.access, key: "accessToken")
-            try keychain.set(tokens.refresh, key: "refreshToken")
-        } catch {
-            print(error)
-        }
-
+        try keychain.set(tokens.access, key: "accessToken")
+        try keychain.set(tokens.refresh, key: "refreshToken")
     }
     
     internal func deleteTokens() {
         try? keychain.removeAll()
+    }
+    
+    func fetchValidToken() -> JWT? {
+        guard let accessToken, let refreshToken else { return nil }
+        
+        switch (accessToken.expired, refreshToken.expired) {
+        case (false, false):
+            return accessToken
+        case (true, false):
+            return refreshToken
+        default:
+            return nil
+        }
     }
     
     private func retrieveToken(key: String) -> JWT? {
