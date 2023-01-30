@@ -11,8 +11,6 @@ import Foundation
 @MainActor
 class AuthViewModel: ObservableObject {
     
-    static let shared: AuthViewModel = AuthViewModel()
-    
     @Published var status: AuthenticationStatus
     
     enum AuthenticationStatus {
@@ -21,7 +19,7 @@ class AuthViewModel: ObservableObject {
         case notSet
     }
     
-    private init() {
+    init() {
         status = .notSet
         self.refreshAuthenticationStatus()
     }

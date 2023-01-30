@@ -9,7 +9,8 @@ import SwiftUI
 
 struct HomeHeaderView: View {
     @State private var manageFeedsPressed: Bool = false
-    @State private var profilePressed: Bool = false
+    @State private var logoutPressed: Bool = false
+    @EnvironmentObject private var modalStore: ModalStore
     
     var body: some View {
         HStack {
@@ -28,20 +29,17 @@ struct HomeHeaderView: View {
             Spacer()
             
             Button {
-                profilePressed = true
+                modalStore.present {
+                    LogoutModalView()
+                }
             } label: {
-                Image(systemName: "person")
+                Image("logout")
                     .headerIconStyle()
             }
 
         }
         .foregroundColor(Color(uiColor: .brandWhite))
         .background(Color(uiColor: .brandPurple), ignoresSafeAreaEdges: .top)
-        .sheet(isPresented: $profilePressed) {
-            profilePressed = false
-        } content: {
-            ProfileView()
-        }
 
     }
 }

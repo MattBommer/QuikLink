@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct LoginView: View {
-    @ObservedObject var authViewModel: AuthViewModel
+    @EnvironmentObject var authViewModel: AuthViewModel
     @StateObject var loginViewModel = LoginViewModel()
     
     private var subtitleText: String {
@@ -94,7 +94,7 @@ struct LoginView: View {
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginView(authViewModel: AuthViewModel.shared)
+        LoginView()
     }
 }
 
