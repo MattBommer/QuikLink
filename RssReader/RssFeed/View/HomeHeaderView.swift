@@ -8,14 +8,13 @@
 import SwiftUI
 
 struct HomeHeaderView: View {
-    @State private var manageFeedsPressed: Bool = false
-    @State private var logoutPressed: Bool = false
+    @State private var manageFeedsPresented: Bool = false
     @EnvironmentObject private var modalStore: ModalStore
     
     var body: some View {
         HStack {
             Button {
-                print("Manage feeds")
+                manageFeedsPresented = true
             } label: {
                 Image(systemName: "square.stack.3d.up")
                     .headerIconStyle()
@@ -40,6 +39,9 @@ struct HomeHeaderView: View {
         }
         .foregroundColor(Color(uiColor: .brandWhite))
         .background(Color(uiColor: .brandPurple), ignoresSafeAreaEdges: .top)
+        .sheet(isPresented: $manageFeedsPresented) {
+            ManageFeedView()
+        }
 
     }
 }

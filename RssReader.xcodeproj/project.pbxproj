@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		38977DD43695238A99C85310 /* Pods_RssReader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA0A3C9D83200CB7097A28DC /* Pods_RssReader.framework */; };
 		80128D6A2978EFF30054C6BD /* Modifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80128D692978EFF30054C6BD /* Modifiers.swift */; };
+		80171DDA2989755D00A11B5A /* FeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80171DD92989755D00A11B5A /* FeedView.swift */; };
+		80171DDC2989774400A11B5A /* ManageFeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80171DDB2989774400A11B5A /* ManageFeedView.swift */; };
 		8053FE052970691400AE6EB4 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8053FE042970691400AE6EB4 /* LoginView.swift */; };
 		8053FE07297089A600AE6EB4 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8053FE06297089A600AE6EB4 /* HomeView.swift */; };
 		80883C6C2980770400BCECC6 /* EmailTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80883C6B2980770400BCECC6 /* EmailTextField.swift */; };
@@ -43,6 +45,8 @@
 
 /* Begin PBXFileReference section */
 		80128D692978EFF30054C6BD /* Modifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Modifiers.swift; sourceTree = "<group>"; };
+		80171DD92989755D00A11B5A /* FeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedView.swift; sourceTree = "<group>"; };
+		80171DDB2989774400A11B5A /* ManageFeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageFeedView.swift; sourceTree = "<group>"; };
 		8053FE042970691400AE6EB4 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		8053FE06297089A600AE6EB4 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		80883C6B2980770400BCECC6 /* EmailTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailTextField.swift; sourceTree = "<group>"; };
@@ -145,6 +149,8 @@
 				809FD94C2980383E0054D45D /* WebView.swift */,
 				80883C73298313EA00BCECC6 /* GradientLoadingView.swift */,
 				80E209EF29881C6D00C0128E /* LogoutModalView.swift */,
+				80171DD92989755D00A11B5A /* FeedView.swift */,
+				80171DDB2989774400A11B5A /* ManageFeedView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -370,6 +376,7 @@
 				808A8A8A2979D38600332431 /* ModalStore.swift in Sources */,
 				809FD951298066630054D45D /* BrandColors.swift in Sources */,
 				808A8A992980261200332431 /* ArticleFeedViewModel.swift in Sources */,
+				80171DDA2989755D00A11B5A /* FeedView.swift in Sources */,
 				80FC8745296E065F0060D735 /* Network.swift in Sources */,
 				80FC8740296E005A0060D735 /* RSSFeedModel.swift in Sources */,
 				80E209F029881C6D00C0128E /* LogoutModalView.swift in Sources */,
@@ -382,6 +389,7 @@
 				809FD94B2980339C0054D45D /* ArticleView.swift in Sources */,
 				8053FE07297089A600AE6EB4 /* HomeView.swift in Sources */,
 				80FC8732296E00380060D735 /* RssReaderApp.swift in Sources */,
+				80171DDC2989774400A11B5A /* ManageFeedView.swift in Sources */,
 				808A8A882979C06A00332431 /* RootModalView.swift in Sources */,
 				80FC8748296E0A0C0060D735 /* Authentication.swift in Sources */,
 				80883C74298313EA00BCECC6 /* GradientLoadingView.swift in Sources */,

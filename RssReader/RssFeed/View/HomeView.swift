@@ -14,6 +14,7 @@ struct HomeView: View {
         RootModalView(backgroundColor: Color(uiColor: .gray.withAlphaComponent(0.3))) {
             VStack(spacing: 0) {
                 HomeHeaderView()
+                    .environmentObject(rssFeedViewModel)
                 
                 // Feed
                 ScrollView {
@@ -24,6 +25,13 @@ struct HomeView: View {
                     }
                     .padding([.top], 8)
                     .padding([.leading, .trailing], 16)
+                }
+                .refreshable {
+                    do {
+                        try await rssFeedViewModel.fetchFeeds()
+                    } catch {
+                        print(error)
+                    }
                 }
             }
         }
