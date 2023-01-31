@@ -17,7 +17,7 @@ struct HomeHeaderView: View {
                 manageFeedsPresented = true
             } label: {
                 Image(systemName: "square.stack.3d.up")
-                    .headerIconStyle()
+                    .icon()
             }
             
             Spacer()
@@ -33,7 +33,7 @@ struct HomeHeaderView: View {
                 }
             } label: {
                 Image("logout")
-                    .headerIconStyle()
+                    .icon()
             }
 
         }
@@ -42,19 +42,8 @@ struct HomeHeaderView: View {
         .sheet(isPresented: $manageFeedsPresented) {
             ManageFeedView()
         }
-
     }
 }
-
-private extension Image {
-    
-    func headerIconStyle() -> some View {
-        resizable()
-            .frame(width: 20, height: 20, alignment: .center)
-            .padding()
-    }
-}
-
 struct HomeHeaderView_Previews: PreviewProvider {
     static var previews: some View {
         HomeHeaderView()

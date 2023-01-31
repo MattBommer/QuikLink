@@ -14,20 +14,18 @@ struct FeedView: View {
     var body: some View {
         HStack {
             Text(feed.title)
+                .padding()
             Spacer()
             Button {
                 feedViewModel.removeFeed(feed.id)
             } label: {
                 Image(systemName: "trash.circle.fill")
-                    .resizable()
                     .renderingMode(.template)
+                    .icon(size: CGSize(width: 30, height: 30))
                     .tint(Color(uiColor: .brandRed))
-                    .frame(width: 40, height: 40)
-                    
             }
         }
         .frame(maxWidth: .infinity)
-        .padding()
         .background(Color(uiColor: .brandWhite))
         .cornerRadius(8)
         .shadow(radius: 1)

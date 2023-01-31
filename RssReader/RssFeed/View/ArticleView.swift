@@ -30,23 +30,15 @@ struct ArticleView: View {
                     .font(.title2)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding([.leading, .trailing], 16)
-                
-                if let description = article.description {
-                    Text(description)
-                        .font(.subheadline)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding([.leading, .trailing], 16)
-                }
             }
         }
         .padding(.bottom, 8)
         .onTapGesture {
             showWebView = true
         }
-        .sheet(isPresented: $showWebView, onDismiss: {
-            showWebView = false
-        }) {
+        .sheet(isPresented: $showWebView) {
             ArticleWebView(url: article.contentUrl)
+                .ignoresSafeArea()
         }
         .background(Color(uiColor: .brandWhite))
         .cornerRadius(8)
