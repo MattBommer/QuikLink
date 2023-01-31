@@ -80,21 +80,40 @@ class ArticleWebViewController: UIViewController, CAAnimationDelegate, WKNavigat
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.addSubview(webView)
-        webView.translatesAutoresizingMaskIntoConstraints = false
+        let headerView = UIView()
+        headerView.backgroundColor = .brandPurple
+        headerView.translatesAutoresizingMaskIntoConstraints = false
         
-        view.addConstraints([
-            webView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            webView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            webView.topAnchor.constraint(equalTo: view.topAnchor),
-            webView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        let closeButton = UIButton()
+        closeButton.addTarget(self, action: #selector(dismissWebView), for: .touchUpInside)
+        closeButton.setImage(UIImage(systemName: "xmark")?.withRenderingMode(.alwaysTemplate), for: .normal)
+        closeButton.tintColor = .brandWhite
+        closeButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        headerView.addSubview(closeButton)
+        headerView.addConstraints([
+            closeButton.centerYAnchor.constraint(equalTo: headerView.centerYAnchor),
+            headerView.trailingAnchor.constraint(equalTo: closeButton.trailingAnchor, constant: 16),
+            closeButton.heightAnchor.constraint(equalToConstant: 25)
         ])
         
+        view.addSubview(webView)
+        view.addSubview(spinner)
+        view.addSubview(headerView)
+
+        webView.translatesAutoresizingMaskIntoConstraints = false
         spinner.translatesAutoresizingMaskIntoConstraints = false
         spinner.backgroundColor = .clear
-        view.addSubview(spinner)
         
         view.addConstraints([
+            headerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            headerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            headerView.topAnchor.constraint(equalTo: view.topAnchor),
+            headerView.heightAnchor.constraint(equalToConstant: 40),
+            webView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            webView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            webView.topAnchor.constraint(equalTo: headerView.bottomAnchor),
+            webView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             spinner.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             spinner.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             spinner.heightAnchor.constraint(equalToConstant: 50),
@@ -102,7 +121,7 @@ class ArticleWebViewController: UIViewController, CAAnimationDelegate, WKNavigat
         ])
         
         webView.navigationDelegate = self
-        request = webView.load(articleRequest)
+        request = webView.load(articleRequest) // TODO: Apple needs to fix this trash
     }
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
@@ -113,6 +132,10 @@ class ArticleWebViewController: UIViewController, CAAnimationDelegate, WKNavigat
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
         guard navigation == request else { return }
         spinner.stopSpinning()
+    }
+    
+    @objc func dismissWebView() {
+        dismiss(animated: true)
     }
 }
 
