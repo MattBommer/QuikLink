@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ManageFeedView: View {
-    @EnvironmentObject var feedViewModel: RSSFeedViewModel
+    @EnvironmentObject var feedStore: FeedStore
     @State var feedUrl: String = ""
     
     var body: some View {
@@ -40,7 +40,7 @@ struct ManageFeedView: View {
                     StretchButton {
                         guard !feedUrl.isEmpty else { return }
                         Task {
-                            try await feedViewModel.addFeed(feedUrl)
+                            try await feedStore.addFeed(feedUrl)
                         }
                     } label: {
                         Text("Add Feed")
@@ -48,26 +48,28 @@ struct ManageFeedView: View {
                     .foregroundColor(Color(uiColor: .brandWhite))
                     .background(Color(uiColor: .brandGreen))
                     .cornerRadius(8)
-                }
+                }.padding([.leading, .trailing])
                 
                 VStack {
                     Text("Subscribed feeds")
                         .font(.title3)
                         .fontWeight(.bold)
                         .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding([.leading, .trailing])
                     
                     ScrollView {
                         LazyVStack {
-                            ForEach(feedViewModel.feeds, id: \.id) { feed in
+                            ForEach(feedStore.feeds, id: \.id) { feed in
                                 FeedView(feed: feed)
                             }
-                            .environmentObject(feedViewModel)
+                            .padding([.leading, .trailing])
+                            .environmentObject(feedStore)
                         }
-                    }
+                        .padding([.top], 8)
+                    } 
                 }
                 .ignoresSafeArea(edges: [.bottom])
             }
-            .padding([.leading, .trailing])
         }
     }
 }

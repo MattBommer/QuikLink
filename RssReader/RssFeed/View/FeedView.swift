@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct FeedView: View {
-    @EnvironmentObject var feedViewModel: RSSFeedViewModel
-    var feed: FeedMetaData
+    @EnvironmentObject var feedViewModel: FeedStore
+    var feed: Feed
     
     var body: some View {
         HStack {
@@ -17,7 +17,7 @@ struct FeedView: View {
                 .padding()
             Spacer()
             Button {
-                feedViewModel.removeFeed(feed.id)
+                feedViewModel.removeFeed(feed)
             } label: {
                 Image(systemName: "trash.circle.fill")
                     .renderingMode(.template)
@@ -28,6 +28,6 @@ struct FeedView: View {
         .frame(maxWidth: .infinity)
         .background(Color(uiColor: .brandWhite))
         .cornerRadius(8)
-        .shadow(radius: 1)
+        .shadow(color: .black.opacity(0.25), radius: 2, x: 0, y: 0.5)
     }
 }

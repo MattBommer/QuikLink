@@ -8,18 +8,18 @@
 import SwiftUI
 
 struct HomeView: View {
-    @StateObject private var rssFeedViewModel = RSSFeedViewModel()
+    @StateObject private var feedStore = FeedStore()
     
     var body: some View {
         RootModalView(backgroundColor: Color(uiColor: .gray.withAlphaComponent(0.3))) {
             VStack(spacing: 0) {
                 HomeHeaderView()
-                    .environmentObject(rssFeedViewModel)
+                    .environmentObject(feedStore)
                 
                 // Feed
                 ScrollView {
                     LazyVStack (spacing: 16) {
-                        ForEach(rssFeedViewModel.articles, id: \.id) { article in
+                        ForEach(feedStore.displayArticles, id: \.id) { article in
                             ArticleView(article: article)
                         }
                     }
@@ -28,7 +28,8 @@ struct HomeView: View {
                 }
                 .refreshable {
                     do {
-                        try await rssFeedViewModel.fetchFeeds()
+//                        try await feedStore.fetchFeeds()
+                        print("is this happening?")
                     } catch {
                         print(error)
                     }
@@ -37,7 +38,7 @@ struct HomeView: View {
         }
         .onAppear {
             Task {
-                try await rssFeedViewModel.fetchFeeds()
+                try await feedStore.fetchFeeds()
             }
         }
     }

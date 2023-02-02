@@ -28,9 +28,19 @@ struct ArticleView: View {
             VStack(alignment: .leading) {
                 Text(article.title)
                     .font(.title2)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding([.leading, .trailing], 16)
+                    
+                
+                Text(article.publication)
+                    .font(.body)
+                    .foregroundColor(.gray)
+                
+                Text(article.publishedString)
+                    .font(.caption2)
+                    .foregroundColor(.gray)
+                                
             }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding([.leading, .trailing], 16)
         }
         .padding(.bottom, 8)
         .onTapGesture {

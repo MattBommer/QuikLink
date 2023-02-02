@@ -10,7 +10,7 @@ import SwiftUI
 struct AddFeedModalView: View {
     @State var feedUrl: String = ""
     @EnvironmentObject var modalStore: ModalStore
-    @EnvironmentObject var feedViewModel: RSSFeedViewModel
+    @EnvironmentObject var feedViewModel: FeedStore
     
     var body: some View {
         VStack {
