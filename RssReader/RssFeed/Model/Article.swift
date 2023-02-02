@@ -42,7 +42,7 @@ struct Article: Identifiable, Hashable {
         } else if delta < TimeInterval.day {
             return "\(Int(delta / .hour))h ago"
         } else if delta < TimeInterval.day * 2 {
-            return "yesterday"
+            return "Yesterday"
         }
         
         let dateFormatter = DateFormatter()

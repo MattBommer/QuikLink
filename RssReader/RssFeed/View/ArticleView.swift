@@ -22,8 +22,9 @@ struct ArticleView: View {
                     GradientLoadingView()
                 }
             }
-            .frame(height: 150)
+            .frame(height: 175, alignment: .top)
             .clipped()
+
             
             VStack(alignment: .leading) {
                 Text(article.title)
@@ -53,13 +54,5 @@ struct ArticleView: View {
         .background(Color(uiColor: .brandWhite))
         .cornerRadius(8)
         .shadow(color: Color(uiColor: .black.withAlphaComponent(0.2)), radius: 4, x: 0, y: 2)
-    }
-}
-
-extension Image {
-    
-    func feedImage() -> some View {
-        return self
-        
     }
 }
