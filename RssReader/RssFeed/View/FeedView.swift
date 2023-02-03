@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct FeedView: View {
-    @EnvironmentObject var feedViewModel: FeedStore
+    @EnvironmentObject var feedStore: FeedStore
     var feed: Feed
     
     var body: some View {
@@ -16,13 +16,25 @@ struct FeedView: View {
             Text(feed.title)
                 .padding()
             Spacer()
-            Button {
-                feedViewModel.removeFeed(feed)
-            } label: {
-                Image(systemName: "trash.circle.fill")
-                    .renderingMode(.template)
-                    .icon(size: CGSize(width: 30, height: 30))
-                    .tint(Color(uiColor: .brandRed))
+            
+            HStack(spacing: 0) {
+                Button {
+                    feedStore.toggleFeed(feed)
+                } label: {
+                    Image(systemName: feed.articlesVisible ? "eye.slash.fill" : "eye.fill")
+                        .renderingMode(.template)
+                        .icon(size: CGSize(width: 30, height: 20), edges: [.leading, .trailing], padding: 8)
+                        .tint(Color(uiColor: .brandGreen))
+                }
+                
+                Button {
+                    feedStore.removeFeed(feed)
+                } label: {
+                    Image(systemName: "trash.circle.fill")
+                        .renderingMode(.template)
+                        .icon(size: CGSize(width: 25, height: 25), edges: [.leading, .trailing], padding: 8)
+                        .tint(Color(uiColor: .brandRed))
+                }
             }
         }
         .frame(maxWidth: .infinity)

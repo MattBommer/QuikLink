@@ -12,6 +12,7 @@ struct Feed: Identifiable, Decodable, Hashable {
     var description: String?
     var feedUrl: URL
     var imageUrl: URL?
+    var articlesVisible: Bool = true
     
     enum CodingKeys: String, CodingKey {
         case resourceId

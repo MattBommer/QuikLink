@@ -12,15 +12,13 @@ import Combine
 
 @MainActor class FeedStore: ObservableObject {
     
-    typealias ArticleComparator = (Article, Article) -> ComparisonResult
+    private typealias FeedId = String
     
-    private var feedMap: [Feed : Set<Article>] = [:]
+    private var feedMap: [FeedId : Set<Article>] = [:]
+    
+    @Published var feeds: [Feed] = []
     
     @Published var displayArticles: [Article] = []
-    
-    var feeds: [Feed] {
-        Array(feedMap.keys.sorted(by: { $0.title < $1.title }))
-    }
     
     func addFeed(_ feedUrl: String) async throws {
         let requestInfo = RequestInfo(path: "feed/add", httpMethod: .post, body: AddFeed(feedUrl: feedUrl.lowercased()), needsAuthorizationToken: true)
@@ -31,10 +29,22 @@ import Combine
         switch response {
         case .success(let feed):
             let articles = Set(await retrieveArticles(for: feed))
-            feedMap[feed] = articles
+            feedMap[feed.id] = articles
+            feeds.addUnique(feed)
             displayArticles.mergeInOrder(articles)
         case .failed(let message):
             print(message)
+        }
+    }
+    
+    func toggleFeed(_ feed: Feed) {
+        guard let index = feeds.firstIndex(of: feed), let articles = feedMap[feed.id] else { return }
+        feeds[index].articlesVisible.toggle()
+        
+        if feeds[index].articlesVisible {
+            displayArticles.mergeInOrder(articles)
+        } else {
+            displayArticles.remove(articles)
         }
     }
     
@@ -99,8 +109,10 @@ import Combine
                     }
                 }
                 
-                feedMap = await group.reduce(into: [:]) { $0[$1.0] = Set($1.1) }
-                feedMap.values.forEach { displayArticles.mergeInOrder($0) }
+                let tempFeedMap = await group.reduce(into: [:]) { $0[$1.0] = Set($1.1) }
+                feedMap = tempFeedMap.reduce(into: [:]) { $0[$1.0.id] = $1.1 }
+                self.feeds = Array(tempFeedMap.keys)
+                tempFeedMap.values.forEach { displayArticles.mergeInOrder($0) }
             })
         case .failed(let message):
             print(message)
@@ -116,7 +128,10 @@ import Combine
             let _: Response<EmptyBody> = try await Network.shared.fetch(request: request)
         }
         
-        guard let deletedArticles = feedMap.removeValue(forKey: feed) else { return }
+        guard let deletedArticles = feedMap.removeValue(forKey: feed.id) else { return }
+        if let index = feeds.firstIndex(of: feed) {
+            feeds.remove(at: index)
+        }
         displayArticles.remove(deletedArticles)
     }
 }
@@ -134,5 +149,12 @@ private extension Array<Article> {
         let prunedArticleSet = NSMutableOrderedSet(array: self)
         prunedArticleSet.minusSet(setToRemove)
         self = prunedArticleSet.array as! [Article]
+    }
+}
+
+private extension Array<Feed> {
+    mutating func addUnique(_ entry: Feed) {
+        guard !contains(entry) else { return }
+        append(entry)
     }
 }

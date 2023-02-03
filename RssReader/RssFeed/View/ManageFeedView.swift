@@ -83,10 +83,10 @@ struct ManageFeedView_Previews: PreviewProvider {
 extension Image {
     
     @ViewBuilder
-    func icon(size: CGSize = CGSize(width: 20, height: 20)) -> some View {
+    func icon(size: CGSize = CGSize(width: 20, height: 20), edges: Edge.Set = .all, padding: CGFloat = 16) -> some View {
         self
             .resizable()
             .frame(width: size.width, height: size.height)
-            .padding()
+            .padding(edges, padding)
     }
 }
