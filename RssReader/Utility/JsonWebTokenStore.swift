@@ -60,7 +60,8 @@ class JsonWebTokenStore {
     }
     
     func fetchValidToken() -> JWT? {
-        guard let accessToken, let refreshToken else { return nil }
+        guard let accessToken = accessToken,
+              let refreshToken = refreshToken else { return nil }
         
         switch (accessToken.expired, refreshToken.expired) {
         case (false, false):

@@ -22,7 +22,10 @@ struct Article: Identifiable, Hashable {
     var imageUrl: URL?
     
     init?(publication: String, url: String?, title: String?, datePublished: Date?, imageUrl: String?) {
-        guard let url, let title, let datePublished, let contentUrl = URL(string: url) else { return nil }
+        guard let url = url,
+              let title = title,
+              let datePublished = datePublished,
+              let contentUrl = URL(string: url) else { return nil }
         
         self.id = url
         self.title = title

@@ -60,7 +60,9 @@ import Combine
         let parser = FeedParser(URL: feedMetaData.feedUrl)
         
         let findImage = { (_ media: MediaNamespace?) -> String? in
-            guard let media, let mediaContents = media.mediaContents else { return nil }
+            guard let media = media,
+                  let mediaContents = media.mediaContents else { return nil }
+            
             let mediaContent = mediaContents.first { $0.attributes?.medium == "image" }
             return mediaContent?.attributes?.url
         }
@@ -136,7 +138,7 @@ import Combine
     }
 }
 
-private extension Array<Article> {
+private extension Array where Element == Article {
     mutating func mergeInOrder(_ setToMerge: Set<Article>) {
         let sort = { (a: Article, b: Article) -> Bool in
             a.datePublished > b.datePublished
@@ -152,7 +154,7 @@ private extension Array<Article> {
     }
 }
 
-private extension Array<Feed> {
+private extension Array where Element == Feed {
     mutating func addUnique(_ entry: Feed) {
         guard !contains(entry) else { return }
         append(entry)

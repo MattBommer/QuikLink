@@ -28,7 +28,7 @@ struct HomeView: View {
                 }
                 .refreshable {
                     do {
-//                        try await feedStore.fetchFeeds()
+                        try await feedStore.fetchFeeds()
                         print("is this happening?")
                     } catch {
                         print(error)
