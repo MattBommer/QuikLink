@@ -32,7 +32,7 @@ struct LoginView: View {
     
     var body: some View {
         VStack(spacing: 32) {
-            Image(uiImage: UIImage(named: "logo")!)
+            Image(uiImage: UIImage(named: "quiklink")!)
                 .resizable()
                 .frame(width: 200, height: 200)
                 .cornerRadius(8)
