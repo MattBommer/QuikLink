@@ -22,19 +22,11 @@ import Combine
     
     func addFeed(_ feedUrl: String) async throws {
         let requestInfo = RequestInfo(path: "feed/add", httpMethod: .post, body: AddFeed(feedUrl: feedUrl.lowercased()), needsAuthorizationToken: true)
-        guard let request = Network.shared.buildRequest(from: requestInfo) else { return }
-        
-        let response: Response<Feed> = try await Network.shared.fetch(request: request)
-        
-        switch response {
-        case .success(let feed):
-            let articles = Set(await retrieveArticles(for: feed))
-            feedMap[feed.id] = articles
-            feeds.addUnique(feed)
-            displayArticles.mergeInOrder(articles)
-        case .failed(let message):
-            print(message)
-        }
+        let feed: Feed = try await Network.shared.fetch(requestInfo: requestInfo).get()
+        let articles = Set(await retrieveArticles(for: feed))
+        feedMap[feed.id] = articles
+        feeds.addUnique(feed)
+        displayArticles.mergeInOrder(articles)
     }
     
     func toggleFeed(_ feed: Feed) {
@@ -98,42 +90,30 @@ import Combine
     
     func fetchFeeds() async throws {
         let requestInfo = RequestInfo(path: "feed/fetch", httpMethod: .get, needsAuthorizationToken: true)
-        guard let request = Network.shared.buildRequest(from: requestInfo) else { return }
-        
-        let response: Response<[Feed]> = try await Network.shared.fetch(request: request)
-        
-        switch response {
-        case .success(let feeds):
-            await withTaskGroup(of: (Feed, [Article]).self, body: { [self] group in
-                for feed in feeds {
-                    group.addTask {
-                        await (feed, self.retrieveArticles(for: feed))
-                    }
+        let feeds: [Feed] = try await Network.shared.fetch(requestInfo: requestInfo).get()
+        await withTaskGroup(of: (Feed, [Article]).self, body: { [self] group in
+            for feed in feeds {
+                group.addTask {
+                    await (feed, self.retrieveArticles(for: feed))
                 }
-                
-                let tempFeedMap = await group.reduce(into: [:]) { $0[$1.0] = Set($1.1) }
-                feedMap = tempFeedMap.reduce(into: [:]) { $0[$1.0.id] = $1.1 }
-                self.feeds = Array(tempFeedMap.keys)
-                tempFeedMap.values.forEach { displayArticles.mergeInOrder($0) }
-            })
-        case .failed(let message):
-            print(message)
-        }
+            }
+            
+            let tempFeedMap = await group.reduce(into: [:]) { $0[$1.0] = Set($1.1) }
+            feedMap = tempFeedMap.reduce(into: [:]) { $0[$1.0.id] = $1.1 }
+            self.feeds = Array(tempFeedMap.keys)
+            tempFeedMap.values.forEach { displayArticles.mergeInOrder($0) }
+        })
     }
     
     
-    func removeFeed(_ feed: Feed) {
+    func removeFeed(_ feed: Feed) async throws {
         let requestInfo = RequestInfo(path: "feed/remove", httpMethod: .post, body: RemoveFeed(feedId: feed.id), needsAuthorizationToken: true)
-        guard let request = Network.shared.buildRequest(from: requestInfo) else { return }
+        let _: EmptyBody = try await Network.shared.fetch(requestInfo: requestInfo).get()
         
-        Task {
-            let _: Response<EmptyBody> = try await Network.shared.fetch(request: request)
-        }
+        guard let index = feeds.firstIndex(of: feed),
+              let deletedArticles = feedMap.removeValue(forKey: feed.id) else { return }
         
-        guard let deletedArticles = feedMap.removeValue(forKey: feed.id) else { return }
-        if let index = feeds.firstIndex(of: feed) {
-            feeds.remove(at: index)
-        }
+        feeds.remove(at: index)
         displayArticles.remove(deletedArticles)
     }
 }

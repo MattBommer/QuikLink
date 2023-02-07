@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import SwiftUI
 
 extension UIColor {
     
@@ -42,6 +43,17 @@ extension UIColor {
     static let brandRed = UIColor(named: "brandred")!
 
     static let brandWhite = UIColor(named: "brandwhite")!
-
     
+    static let brandYellow = UIColor(named: "brandyellow")!
+}
+
+extension View {
+    @ViewBuilder
+    func isHidden(_ hide: Bool) -> some View {
+        if hide {
+            self.hidden()
+        } else {
+            self
+        }
+    }
 }

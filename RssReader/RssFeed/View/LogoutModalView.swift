@@ -19,6 +19,7 @@ struct LogoutModalView: View {
             HStack {
                 Button {
                     authViewModel.logOut()
+                    modalStore.dismiss()
                 } label: {
                     Text("Yes")
                         .padding()

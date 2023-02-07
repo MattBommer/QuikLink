@@ -8,18 +8,20 @@
 import SwiftUI
 
 struct ContentView: View {
-    @StateObject var authModel = AuthViewModel()
+    @StateObject var authViewModel = AuthViewModel()
     
     var body: some View {
-        Group {
-            switch authModel.status {
-            case .authenticated:
-                HomeView()
-            case .unauthenticated, .notSet:
-                LoginView()
+        RootModalView(backgroundColor: Color(uiColor: .gray.withAlphaComponent(0.3))) {
+            Group {
+                switch authViewModel.status {
+                case .authenticated:
+                    HomeView()
+                case .unauthenticated, .notSet:
+                    LoginView()
+                }
             }
         }
-        .environmentObject(authModel)
+        .environmentObject(authViewModel)
     }
 }
 

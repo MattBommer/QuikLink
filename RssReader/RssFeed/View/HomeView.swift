@@ -11,28 +11,26 @@ struct HomeView: View {
     @StateObject private var feedStore = FeedStore()
     
     var body: some View {
-        RootModalView(backgroundColor: Color(uiColor: .gray.withAlphaComponent(0.3))) {
-            VStack(spacing: 0) {
-                HomeHeaderView()
-                    .environmentObject(feedStore)
-                
-                // Feed
-                ScrollView {
-                    LazyVStack (spacing: 16) {
-                        ForEach(feedStore.displayArticles, id: \.id) { article in
-                            ArticleView(article: article)
-                        }
+        VStack(spacing: 0) {
+            HomeHeaderView()
+                .environmentObject(feedStore)
+            
+            // Feed
+            ScrollView {
+                LazyVStack (spacing: 16) {
+                    ForEach(feedStore.displayArticles, id: \.id) { article in
+                        ArticleView(article: article)
                     }
-                    .padding([.top], 8)
-                    .padding([.leading, .trailing], 16)
                 }
-                .refreshable {
-                    do {
-                        try await feedStore.fetchFeeds()
-                        print("is this happening?")
-                    } catch {
-                        print(error)
-                    }
+                .padding([.top], 8)
+                .padding([.leading, .trailing], 16)
+            }
+            .refreshable {
+                do {
+                    try await feedStore.fetchFeeds()
+                    print("is this happening?")
+                } catch {
+                    print(error)
                 }
             }
         }

@@ -18,10 +18,10 @@ struct RootModalView<T: View>: View {
             contentView()
             if modalStore.isPresented {
                 Group {
-                    backgroundColor
+                    backgroundColor?.isHidden(!modalStore.dimBackground)
                     modalStore.contentView
                 }
-                .ignoresSafeArea()
+                .ignoresSafeArea(modalStore.ignoreSafeArea ? .all : [])
             }
         }
         .environmentObject(modalStore)

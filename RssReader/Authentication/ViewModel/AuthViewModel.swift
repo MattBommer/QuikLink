@@ -33,28 +33,13 @@ class AuthViewModel: ObservableObject {
     
     func login(user: User) async throws {
         let requestInfo = RequestInfo(path: "login", httpMethod: .post, body: user, needsAuthorizationToken: false)
-        guard let urlRequest = Network.shared.buildRequest(from: requestInfo) else { return }
-        
-        let _: Response<EmptyBody> = try await Network.shared.fetch(request: urlRequest)
-        
-        await MainActor.run(body: { refreshAuthenticationStatus() })
+        let _:EmptyBody = try await Network.shared.fetch(requestInfo: requestInfo).get()
+        refreshAuthenticationStatus()
     }
     
-    func signUp(user: User) async throws -> String? {
+    func signUp(user: User) async throws -> SignUpMessage {
         let requestInfo = RequestInfo(path: "signup", httpMethod: .post, body: user, needsAuthorizationToken: false)
-        guard let urlRequest = Network.shared.buildRequest(from: requestInfo) else { return nil }
-
-        let response: Response<SignUpMessage> = try await Network.shared.fetch(request: urlRequest)
-        
-        var result: String
-        switch response {
-        case .success(let signUpMessage):
-            result = signUpMessage.message
-        case .failed(let message):
-            result = message
-        }
-        
-        return result
+        return try await Network.shared.fetch(requestInfo: requestInfo).get()
     }
     
     func logOut() {

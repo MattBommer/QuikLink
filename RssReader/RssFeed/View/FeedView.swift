@@ -28,7 +28,9 @@ struct FeedView: View {
                 }
                 
                 Button {
-                    feedStore.removeFeed(feed)
+                    Task {
+                        try await feedStore.removeFeed(feed)
+                    }
                 } label: {
                     Image(systemName: "trash.circle.fill")
                         .renderingMode(.template)

@@ -48,11 +48,15 @@ class JsonWebTokenStore {
     
     private init() {}
     
-    internal func setTokens(_ tokens: JWTTokens?) throws {
+    internal func setTokens(_ tokens: JWTTokens?) {
         guard let tokens = tokens else { return }
         
-        try keychain.set(tokens.access, key: "accessToken")
-        try keychain.set(tokens.refresh, key: "refreshToken")
+        do {
+            try keychain.set(tokens.access, key: "accessToken")
+            try keychain.set(tokens.refresh, key: "refreshToken")
+        } catch {
+            fatalError(error.localizedDescription)
+        }
     }
     
     internal func deleteTokens() {

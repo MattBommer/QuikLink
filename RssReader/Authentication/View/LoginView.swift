@@ -9,6 +9,7 @@ import SwiftUI
 
 struct LoginView: View {
     @EnvironmentObject var authViewModel: AuthViewModel
+    @EnvironmentObject var modalStore: ModalStore
     @StateObject var loginViewModel = LoginViewModel()
     
     private var subtitleText: String {
@@ -23,12 +24,12 @@ struct LoginView: View {
     private var captionButtonAction: () {
         switch loginViewModel.formType {
         case .login:
-            print("Forgot password flow") //TODO: Don't think I will do this
+            print("Forgot password flow") // Won't do
         case .signUp:
             loginViewModel.formType = .login
         }
     }
-        
+    
     var body: some View {
         VStack(spacing: 32) {
             Image(uiImage: UIImage(named: "logo")!)
@@ -43,11 +44,25 @@ struct LoginView: View {
                     StretchButton {
                         Task {
                             guard let user = loginViewModel.getUser() else { return }
-                            switch loginViewModel.formType {
-                            case .login:
-                                try await authViewModel.login(user: user)
-                            case .signUp:
-                                let _ = try await authViewModel.signUp(user: user)
+                            do {
+                                switch loginViewModel.formType {
+                                case .login:
+                                    try await authViewModel.login(user: user)
+                                case .signUp:
+                                    let signUpResponse = try await authViewModel.signUp(user: user).message
+                                    modalStore.present(view: {
+                                        MessageView(message: signUpResponse)
+                                    }, dim: false)
+                                }
+                            } catch {
+                                switch error {
+                                case is ResponseError:
+                                    modalStore.present(view: {
+                                        MessageView(message: error.localizedDescription, type: .critical)
+                                    }, dim: false, ignoreSafeArea: false)
+                                default:
+                                    print(error)
+                                }
                             }
                         }
                     } label: {
@@ -85,26 +100,10 @@ struct LoginView: View {
         }
         .padding()
     }
-    
-    enum UserAction: String {
-        case login = "Login"
-        case signUp = "Sign Up"
-    }
 }
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
         LoginView()
-    }
-}
-
-extension View {
-    @ViewBuilder
-    func isHidden(_ hide: Bool) -> some View {
-        if hide {
-            self.hidden()
-        } else {
-            self
-        }
     }
 }

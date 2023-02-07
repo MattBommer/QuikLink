@@ -11,10 +11,14 @@ import SwiftUI
 class ModalStore: ObservableObject {
     
     @Published var contentView: AnyView = AnyView(EmptyView())
+    @Published var dimBackground = true
+    @Published var ignoreSafeArea = true
     @Published var isPresented: Bool = false
     
-    func present<ContentView: View>(@ViewBuilder view: () -> ContentView) {
+    func present<ContentView: View>(@ViewBuilder view: () -> ContentView, dim: Bool = true, ignoreSafeArea: Bool = true) {
         contentView = AnyView(view())
+        dimBackground = dim
+        self.ignoreSafeArea = ignoreSafeArea
         isPresented = true
     }
     
