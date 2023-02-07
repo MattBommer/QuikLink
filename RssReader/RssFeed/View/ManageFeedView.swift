@@ -14,7 +14,7 @@ struct ManageFeedView: View {
     var body: some View {
         VStack {
             Text("Manage Feeds")
-                .font(.title)
+                .font(.custom("ShareTechMono-Regular", size: 28))
                 .frame(maxWidth: .infinity)
                 .padding()
                 .foregroundColor(Color(uiColor: .brandWhite))
@@ -22,8 +22,8 @@ struct ManageFeedView: View {
             
             VStack(spacing: 24) {
                 VStack {
-                    Text("Add New Feed")
-                        .font(.title3)
+                    Text("Add new feed")
+                        .font(.custom("ShareTechMono-Regular", size: 24))
                         .fontWeight(.bold)
                         .frame(maxWidth: .infinity, alignment: .leading)
                     
@@ -52,7 +52,7 @@ struct ManageFeedView: View {
                 
                 VStack {
                     Text("Subscribed feeds")
-                        .font(.title3)
+                        .font(.custom("ShareTechMono-Regular", size: 24))
                         .fontWeight(.bold)
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding([.leading, .trailing])

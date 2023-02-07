@@ -11,6 +11,7 @@
 		80045B2C2992A83300D5CF87 /* RequestInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80045B2B2992A83300D5CF87 /* RequestInfo.swift */; };
 		80045B2E2992A89B00D5CF87 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80045B2D2992A89B00D5CF87 /* Response.swift */; };
 		80045B312992D5C600D5CF87 /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80045B302992D5C600D5CF87 /* MessageView.swift */; };
+		80045B402992F10600D5CF87 /* ShareTechMono-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 80045B3F2992F10600D5CF87 /* ShareTechMono-Regular.ttf */; };
 		80128D6A2978EFF30054C6BD /* Modifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80128D692978EFF30054C6BD /* Modifiers.swift */; };
 		80171DDA2989755D00A11B5A /* FeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80171DD92989755D00A11B5A /* FeedView.swift */; };
 		80171DDC2989774400A11B5A /* ManageFeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80171DDB2989774400A11B5A /* ManageFeedView.swift */; };
@@ -50,6 +51,7 @@
 		80045B2B2992A83300D5CF87 /* RequestInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestInfo.swift; sourceTree = "<group>"; };
 		80045B2D2992A89B00D5CF87 /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
 		80045B302992D5C600D5CF87 /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
+		80045B3F2992F10600D5CF87 /* ShareTechMono-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ShareTechMono-Regular.ttf"; sourceTree = "<group>"; };
 		80128D692978EFF30054C6BD /* Modifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Modifiers.swift; sourceTree = "<group>"; };
 		80171DD92989755D00A11B5A /* FeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedView.swift; sourceTree = "<group>"; };
 		80171DDB2989774400A11B5A /* ManageFeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageFeedView.swift; sourceTree = "<group>"; };
@@ -120,6 +122,22 @@
 				80045B302992D5C600D5CF87 /* MessageView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		80045B3D2992F10600D5CF87 /* Share_Tech_Mono */ = {
+			isa = PBXGroup;
+			children = (
+				80045B3E2992F10600D5CF87 /* Fonts */,
+			);
+			path = Share_Tech_Mono;
+			sourceTree = "<group>";
+		};
+		80045B3E2992F10600D5CF87 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				80045B3F2992F10600D5CF87 /* ShareTechMono-Regular.ttf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 		80DFAD5229772E16006BAED6 /* Model */ = {
@@ -201,6 +219,7 @@
 		80FC8725296E00380060D735 = {
 			isa = PBXGroup;
 			children = (
+				80045B3D2992F10600D5CF87 /* Share_Tech_Mono */,
 				80FC8730296E00380060D735 /* RssReader */,
 				80FC872F296E00380060D735 /* Products */,
 				EF3603B9B3D57F2371108C33 /* Pods */,
@@ -339,6 +358,7 @@
 			files = (
 				80FC8739296E00390060D735 /* Preview Assets.xcassets in Resources */,
 				80FC8736296E00390060D735 /* Assets.xcassets in Resources */,
+				80045B402992F10600D5CF87 /* ShareTechMono-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -4,5 +4,9 @@
 <dict>
 	<key>HOST_URL</key>
 	<string>http://localhost:3000</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>ShareTechMono-Regular.ttf</string>
+	</array>
 </dict>
 </plist>

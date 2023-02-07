@@ -23,7 +23,7 @@ struct HomeHeaderView: View {
             Spacer()
             
             Text("QuikLink")
-                .font(.title)
+                .font(.custom("ShareTechMono-Regular", size: 28))
             
             Spacer()
             
