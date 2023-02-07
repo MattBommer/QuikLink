@@ -52,7 +52,7 @@ struct LoginView: View {
                                     let signUpResponse = try await authViewModel.signUp(user: user).message
                                     modalStore.present(view: {
                                         MessageView(message: signUpResponse)
-                                    }, dim: false)
+                                    }, dim: false, ignoreSafeArea: false)
                                 }
                             } catch {
                                 switch error {
