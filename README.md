@@ -2,20 +2,6 @@
 
 ##### A simple RSS reader for aggregating articles from all your favorite news sources.
 
-## Setup
-
-This project utilizes a number of pods for key storage and RSS parsing. Because of this, it requires you have `CocoaPods` installed on your computer. If you already have it install then this step may be skipped, otherwise run
-
-```bash
-sudo gem install cocoapods
-```
-
-Once `CocoaPods` is installed, we need to download all of our projects dependencies. Do so by running the following command in the project's root directory:
-
-```bash
-pod install
-```
-
 ## Running QuikLink
 
 Before the iOS app can be run, you must first setup up the backend and run it in your terminal. To do so clone the [QuikLink-Backend](https://github.com/MattBommer/QuikLink-Backend) repo and follow the setup guide listed in the [README.md](https://github.com/MattBommer/QuikLink-Backend/blob/main/README.md)
