@@ -10,6 +10,7 @@ import SwiftUI
 struct ManageFeedView: View {
     @EnvironmentObject var feedStore: FeedStore
     @State var feedUrl: String = ""
+    @State var errorText: String = ""
     
     var body: some View {
         VStack {
@@ -27,7 +28,7 @@ struct ManageFeedView: View {
                         .fontWeight(.bold)
                         .frame(maxWidth: .infinity, alignment: .leading)
                     
-                    TextField("Insert rss feed url", text: $feedUrl)
+                    TextField("Paste rss feed url", text: $feedUrl)
                         .padding()
                         .textInputAutocapitalization(.never)
                         .disableAutocorrection(true)
@@ -37,10 +38,24 @@ struct ManageFeedView: View {
                                 .stroke(Color.gray, lineWidth: 0.5)
                         }
                     
+                    Text(errorText)
+                        .font(.caption)
+                        .foregroundColor(Color(uiColor: .brandRed))
+                    
                     StretchButton {
                         guard !feedUrl.isEmpty else { return }
                         Task {
-                            try await feedStore.addFeed(feedUrl)
+                            do {
+                                try await feedStore.addFeed(feedUrl)
+                                errorText = ""
+                            } catch {
+                                switch error {
+                                case is ResponseError:
+                                    errorText = error.localizedDescription
+                                default:
+                                    print("Unhandled error \(error)")
+                                }
+                            }
                         }
                     } label: {
                         Text("Add Feed")

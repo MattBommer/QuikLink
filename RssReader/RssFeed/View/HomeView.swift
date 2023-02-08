@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct HomeView: View {
+    @EnvironmentObject private var modalStore: ModalStore
     @StateObject private var feedStore = FeedStore()
     
     var body: some View {
@@ -27,11 +28,7 @@ struct HomeView: View {
                     .padding([.leading, .trailing], 16)
                 }
                 .refreshable {
-                    do {
-                        try await feedStore.fetchFeeds()
-                    } catch {
-                        print(error)
-                    }
+                    fetchFeeds()
                 }
                 
                 if feedStore.displayArticles.isEmpty {
@@ -40,11 +37,20 @@ struct HomeView: View {
             }
         }
         .onAppear {
-            Task {
+            fetchFeeds()
+        }
+    }
+    
+    func fetchFeeds() {
+        Task {
+            do {
                 try await feedStore.fetchFeeds()
+            } catch {
+                error.displayMessage(with: modalStore)
             }
         }
     }
+    
 }
 
 struct RSSFeedView_Previews: PreviewProvider {

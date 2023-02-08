@@ -57,3 +57,17 @@ extension View {
         }
     }
 }
+
+extension Error {
+    func displayMessage(with modalStore: ModalStore) {
+        switch self {
+        case is ResponseError:
+            modalStore.present(view: {
+                MessageView(message: localizedDescription, type: .critical)
+            }, dim: false, ignoreSafeArea: false)
+        default:
+            print(self)
+        }
+
+    }
+}

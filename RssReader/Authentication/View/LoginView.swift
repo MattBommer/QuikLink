@@ -56,14 +56,7 @@ struct LoginView: View {
                                     loginViewModel.formType = .login
                                 }
                             } catch {
-                                switch error {
-                                case is ResponseError:
-                                    modalStore.present(view: {
-                                        MessageView(message: error.localizedDescription, type: .critical)
-                                    }, dim: false, ignoreSafeArea: false)
-                                default:
-                                    print(error)
-                                }
+                                error.displayMessage(with: modalStore)
                             }
                         }
                     } label: {
