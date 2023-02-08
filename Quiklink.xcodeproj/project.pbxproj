@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		38977DD43695238A99C85310 /* Pods_RssReader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA0A3C9D83200CB7097A28DC /* Pods_RssReader.framework */; };
 		80045B2C2992A83300D5CF87 /* RequestInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80045B2B2992A83300D5CF87 /* RequestInfo.swift */; };
 		80045B2E2992A89B00D5CF87 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80045B2D2992A89B00D5CF87 /* Response.swift */; };
 		80045B312992D5C600D5CF87 /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80045B302992D5C600D5CF87 /* MessageView.swift */; };
@@ -46,9 +45,11 @@
 		80FC8748296E0A0C0060D735 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FC8747296E0A0C0060D735 /* AuthViewModel.swift */; };
 		80FC874A296E0AC00060D735 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FC8749296E0AC00060D735 /* User.swift */; };
 		80FC874C296E108F0060D735 /* JsonWebTokenStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FC874B296E108F0060D735 /* JsonWebTokenStore.swift */; };
+		DFBFBF1D7C8DB14A6F005217 /* Pods_Quiklink.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8B6DD4C51C52FCAA17CCC40 /* Pods_Quiklink.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2E515D998711F0C7BBFE30AF /* Pods-Quiklink.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Quiklink.debug.xcconfig"; path = "Target Support Files/Pods-Quiklink/Pods-Quiklink.debug.xcconfig"; sourceTree = "<group>"; };
 		80045B2B2992A83300D5CF87 /* RequestInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestInfo.swift; sourceTree = "<group>"; };
 		80045B2D2992A89B00D5CF87 /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
 		80045B302992D5C600D5CF87 /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
@@ -78,7 +79,7 @@
 		80DFAD5B29773B7B006BAED6 /* HomeHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeHeaderView.swift; sourceTree = "<group>"; };
 		80E209EF29881C6D00C0128E /* LogoutModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutModalView.swift; sourceTree = "<group>"; };
 		80F635EB296F277500F9D7DA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		80FC872E296E00380060D735 /* RssReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RssReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		80FC872E296E00380060D735 /* Quiklink.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Quiklink.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		80FC8731296E00380060D735 /* RssReaderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RssReaderApp.swift; sourceTree = "<group>"; };
 		80FC8733296E00380060D735 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		80FC8735296E00390060D735 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -89,9 +90,8 @@
 		80FC8747296E0A0C0060D735 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		80FC8749296E0AC00060D735 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		80FC874B296E108F0060D735 /* JsonWebTokenStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonWebTokenStore.swift; sourceTree = "<group>"; };
-		A05D1785074F8DA7212A59AF /* Pods-RssReader.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RssReader.release.xcconfig"; path = "Target Support Files/Pods-RssReader/Pods-RssReader.release.xcconfig"; sourceTree = "<group>"; };
-		F84E0D896D83B92D2C6BE79B /* Pods-RssReader.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RssReader.debug.xcconfig"; path = "Target Support Files/Pods-RssReader/Pods-RssReader.debug.xcconfig"; sourceTree = "<group>"; };
-		FA0A3C9D83200CB7097A28DC /* Pods_RssReader.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RssReader.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D9C40B4C0870FB94F64F633A /* Pods-Quiklink.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Quiklink.release.xcconfig"; path = "Target Support Files/Pods-Quiklink/Pods-Quiklink.release.xcconfig"; sourceTree = "<group>"; };
+		F8B6DD4C51C52FCAA17CCC40 /* Pods_Quiklink.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Quiklink.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,13 +99,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				38977DD43695238A99C85310 /* Pods_RssReader.framework in Frameworks */,
+				DFBFBF1D7C8DB14A6F005217 /* Pods_Quiklink.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2E9D63CB0107FE9ABD1A4307 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F8B6DD4C51C52FCAA17CCC40 /* Pods_Quiklink.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		80045B2A2992A7A400D5CF87 /* Network */ = {
 			isa = PBXGroup;
 			children = (
@@ -223,22 +231,22 @@
 			isa = PBXGroup;
 			children = (
 				80045B3D2992F10600D5CF87 /* Share_Tech_Mono */,
-				80FC8730296E00380060D735 /* RssReader */,
+				80FC8730296E00380060D735 /* Quiklink */,
 				80FC872F296E00380060D735 /* Products */,
 				EF3603B9B3D57F2371108C33 /* Pods */,
-				953D705A8B7C89A67C929A5B /* Frameworks */,
+				2E9D63CB0107FE9ABD1A4307 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
 		80FC872F296E00380060D735 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				80FC872E296E00380060D735 /* RssReader.app */,
+				80FC872E296E00380060D735 /* Quiklink.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		80FC8730296E00380060D735 /* RssReader */ = {
+		80FC8730296E00380060D735 /* Quiklink */ = {
 			isa = PBXGroup;
 			children = (
 				80F635EB296F277500F9D7DA /* Info.plist */,
@@ -251,7 +259,7 @@
 				80FC8735296E00390060D735 /* Assets.xcassets */,
 				80FC8737296E00390060D735 /* Preview Content */,
 			);
-			path = RssReader;
+			path = Quiklink;
 			sourceTree = "<group>";
 		};
 		80FC8737296E00390060D735 /* Preview Content */ = {
@@ -282,19 +290,11 @@
 			path = Authentication;
 			sourceTree = "<group>";
 		};
-		953D705A8B7C89A67C929A5B /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				FA0A3C9D83200CB7097A28DC /* Pods_RssReader.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		EF3603B9B3D57F2371108C33 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				F84E0D896D83B92D2C6BE79B /* Pods-RssReader.debug.xcconfig */,
-				A05D1785074F8DA7212A59AF /* Pods-RssReader.release.xcconfig */,
+				2E515D998711F0C7BBFE30AF /* Pods-Quiklink.debug.xcconfig */,
+				D9C40B4C0870FB94F64F633A /* Pods-Quiklink.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -302,23 +302,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		80FC872D296E00380060D735 /* RssReader */ = {
+		80FC872D296E00380060D735 /* Quiklink */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 80FC873C296E00390060D735 /* Build configuration list for PBXNativeTarget "RssReader" */;
+			buildConfigurationList = 80FC873C296E00390060D735 /* Build configuration list for PBXNativeTarget "Quiklink" */;
 			buildPhases = (
-				662B28ED2DCE17D65A54D645 /* [CP] Check Pods Manifest.lock */,
+				3A024FBC0BDEDB31DB5138D7 /* [CP] Check Pods Manifest.lock */,
 				80FC872A296E00380060D735 /* Sources */,
 				80FC872B296E00380060D735 /* Frameworks */,
 				80FC872C296E00380060D735 /* Resources */,
-				812A817CE1F921B9144CDCB4 /* [CP] Embed Pods Frameworks */,
+				5CE9E0C8946212AE118213C1 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = RssReader;
+			name = Quiklink;
 			productName = RssReader;
-			productReference = 80FC872E296E00380060D735 /* RssReader.app */;
+			productReference = 80FC872E296E00380060D735 /* Quiklink.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -336,7 +336,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 80FC8729296E00380060D735 /* Build configuration list for PBXProject "RssReader" */;
+			buildConfigurationList = 80FC8729296E00380060D735 /* Build configuration list for PBXProject "Quiklink" */;
 			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -349,7 +349,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				80FC872D296E00380060D735 /* RssReader */,
+				80FC872D296E00380060D735 /* Quiklink */,
 			);
 		};
 /* End PBXProject section */
@@ -368,7 +368,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		662B28ED2DCE17D65A54D645 /* [CP] Check Pods Manifest.lock */ = {
+		3A024FBC0BDEDB31DB5138D7 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -383,28 +383,28 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-RssReader-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-Quiklink-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		812A817CE1F921B9144CDCB4 /* [CP] Embed Pods Frameworks */ = {
+		5CE9E0C8946212AE118213C1 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-RssReader/Pods-RssReader-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-Quiklink/Pods-Quiklink-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-RssReader/Pods-RssReader-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-Quiklink/Pods-Quiklink-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-RssReader/Pods-RssReader-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Quiklink/Pods-Quiklink-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -573,17 +573,17 @@
 		};
 		80FC873D296E00390060D735 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F84E0D896D83B92D2C6BE79B /* Pods-RssReader.debug.xcconfig */;
+			baseConfigurationReference = 2E515D998711F0C7BBFE30AF /* Pods-Quiklink.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"RssReader/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Quiklink/Preview Content\"";
 				DEVELOPMENT_TEAM = 86YM68FFQF;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = RssReader/Info.plist;
+				INFOPLIST_FILE = Quiklink/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -594,7 +594,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = Bomma.RssReader;
+				PRODUCT_BUNDLE_IDENTIFIER = Bomma.Quiklink;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -604,17 +604,17 @@
 		};
 		80FC873E296E00390060D735 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A05D1785074F8DA7212A59AF /* Pods-RssReader.release.xcconfig */;
+			baseConfigurationReference = D9C40B4C0870FB94F64F633A /* Pods-Quiklink.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"RssReader/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Quiklink/Preview Content\"";
 				DEVELOPMENT_TEAM = 86YM68FFQF;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = RssReader/Info.plist;
+				INFOPLIST_FILE = Quiklink/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -625,7 +625,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = Bomma.RssReader;
+				PRODUCT_BUNDLE_IDENTIFIER = Bomma.Quiklink;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -636,7 +636,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		80FC8729296E00380060D735 /* Build configuration list for PBXProject "RssReader" */ = {
+		80FC8729296E00380060D735 /* Build configuration list for PBXProject "Quiklink" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				80FC873A296E00390060D735 /* Debug */,
@@ -645,7 +645,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		80FC873C296E00390060D735 /* Build configuration list for PBXNativeTarget "RssReader" */ = {
+		80FC873C296E00390060D735 /* Build configuration list for PBXNativeTarget "Quiklink" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				80FC873D296E00390060D735 /* Debug */,
