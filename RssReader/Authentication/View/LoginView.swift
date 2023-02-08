@@ -53,6 +53,7 @@ struct LoginView: View {
                                     modalStore.present(view: {
                                         MessageView(message: signUpResponse)
                                     }, dim: false, ignoreSafeArea: false)
+                                    loginViewModel.formType = .login
                                 }
                             } catch {
                                 switch error {
