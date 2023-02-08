@@ -16,20 +16,26 @@ struct HomeView: View {
                 .environmentObject(feedStore)
             
             // Feed
-            ScrollView {
-                LazyVStack (spacing: 16) {
-                    ForEach(feedStore.displayArticles, id: \.id) { article in
-                        ArticleView(article: article)
+            ZStack {
+                ScrollView {
+                    LazyVStack (spacing: 16) {
+                        ForEach(feedStore.displayArticles, id: \.id) { article in
+                            ArticleView(article: article)
+                        }
+                    }
+                    .padding([.top], 8)
+                    .padding([.leading, .trailing], 16)
+                }
+                .refreshable {
+                    do {
+                        try await feedStore.fetchFeeds()
+                    } catch {
+                        print(error)
                     }
                 }
-                .padding([.top], 8)
-                .padding([.leading, .trailing], 16)
-            }
-            .refreshable {
-                do {
-                    try await feedStore.fetchFeeds()
-                } catch {
-                    print(error)
+                
+                if feedStore.displayArticles.isEmpty {
+                    EmptyFeedView()
                 }
             }
         }
