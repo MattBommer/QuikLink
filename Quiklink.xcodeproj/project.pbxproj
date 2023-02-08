@@ -223,7 +223,7 @@
 			isa = PBXGroup;
 			children = (
 				80045B3D2992F10600D5CF87 /* Share_Tech_Mono */,
-				80FC8730296E00380060D735 /* RssReader */,
+				80FC8730296E00380060D735 /* Quiklink */,
 				80FC872F296E00380060D735 /* Products */,
 				EF3603B9B3D57F2371108C33 /* Pods */,
 				953D705A8B7C89A67C929A5B /* Frameworks */,
@@ -238,7 +238,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		80FC8730296E00380060D735 /* RssReader */ = {
+		80FC8730296E00380060D735 /* Quiklink */ = {
 			isa = PBXGroup;
 			children = (
 				80F635EB296F277500F9D7DA /* Info.plist */,
@@ -251,7 +251,7 @@
 				80FC8735296E00390060D735 /* Assets.xcassets */,
 				80FC8737296E00390060D735 /* Preview Content */,
 			);
-			path = RssReader;
+			path = Quiklink;
 			sourceTree = "<group>";
 		};
 		80FC8737296E00390060D735 /* Preview Content */ = {
@@ -579,11 +579,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"RssReader/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Quiklink/Preview Content\"";
 				DEVELOPMENT_TEAM = 86YM68FFQF;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = RssReader/Info.plist;
+				INFOPLIST_FILE = Quiklink/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -594,7 +594,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = Bomma.RssReader;
+				PRODUCT_BUNDLE_IDENTIFIER = Bomma.Quiklink;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -610,11 +610,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"RssReader/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Quiklink/Preview Content\"";
 				DEVELOPMENT_TEAM = 86YM68FFQF;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = RssReader/Info.plist;
+				INFOPLIST_FILE = Quiklink/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -625,7 +625,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = Bomma.RssReader;
+				PRODUCT_BUNDLE_IDENTIFIER = Bomma.Quiklink;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
