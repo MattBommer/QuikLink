@@ -1,0 +1,6 @@
+framework module Pods_Quiklink {
+  umbrella header "Pods-Quiklink-umbrella.h"
+
+  export *
+  module * { export * }
+}

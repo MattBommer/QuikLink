@@ -2,9 +2,12 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:RssReader.xcodeproj">
+      location = "group:/Users/mattbommer/Projects/rss/QuikLink/Quiklink.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Pods/Pods.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:Quiklink.xcodeproj">
    </FileRef>
 </Workspace>

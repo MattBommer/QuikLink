@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double Pods_RssReaderVersionNumber;
-FOUNDATION_EXPORT const unsigned char Pods_RssReaderVersionString[];
+FOUNDATION_EXPORT double Pods_QuiklinkVersionNumber;
+FOUNDATION_EXPORT const unsigned char Pods_QuiklinkVersionString[];
 
