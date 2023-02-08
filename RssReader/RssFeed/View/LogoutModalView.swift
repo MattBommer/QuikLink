@@ -22,26 +22,35 @@ struct LogoutModalView: View {
                     modalStore.dismiss()
                 } label: {
                     Text("Yes")
+                        .frame(maxWidth: .infinity)
                         .padding()
-                        .background(Color(uiColor: .brandRed))
-                        .cornerRadius(8)
+                        .foregroundColor(Color(uiColor: .brandWhite))
                 }
+                .background(Color(uiColor: .brandBlue))
+                .cornerRadius(8)
+
                 Button {
                     modalStore.dismiss()
                 } label: {
                     Text("No")
+                        .frame(maxWidth: .infinity)
                         .padding()
-                        .background(Color(uiColor: .brandGreen))
-                        .cornerRadius(8)
+                        .foregroundColor(Color(uiColor: .brandBlue))
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 8)
+                                .stroke(Color(uiColor: .brandBlue), lineWidth: 2)
+                        )
                 }
+                .cornerRadius(8)
             }
-            .foregroundColor(Color(uiColor: .brandWhite))
+            
         }
         .padding()
         .background {
             RoundedRectangle(cornerRadius: 8)
                 .fill(Color(uiColor: .brandWhite))
         }
+        .padding()
     }
 }
 

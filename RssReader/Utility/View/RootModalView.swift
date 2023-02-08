@@ -18,7 +18,11 @@ struct RootModalView<T: View>: View {
             contentView()
             if modalStore.isPresented {
                 Group {
-                    backgroundColor?.isHidden(!modalStore.dimBackground)
+                    backgroundColor?
+                        .isHidden(!modalStore.dimBackground)
+                        .onTapGesture {
+                            modalStore.dismiss()
+                        }
                     modalStore.contentView
                 }
                 .ignoresSafeArea(modalStore.ignoreSafeArea ? .all : [])
