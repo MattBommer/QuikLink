@@ -2,6 +2,10 @@
 
 ##### A simple RSS reader for aggregating articles from all your favorite news sources.
 
+## Xcode Minimum Version
+
+This project has a Xcode minimum version of 13.0. Using a version before this may prevent you from opening the project or may cause unintended results.
+
 ## Running QuikLink
 
 Before the iOS app can be run, you must first setup up the backend and run it in your terminal. To do so clone the [QuikLink-Backend](https://github.com/MattBommer/QuikLink-Backend) repo and follow the setup guide listed in the [README.md](https://github.com/MattBommer/QuikLink-Backend/blob/main/README.md)

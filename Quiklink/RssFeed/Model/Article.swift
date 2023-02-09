@@ -53,12 +53,3 @@ struct Article: Identifiable, Hashable {
         return dateFormatter.string(from: datePublished)
     }
 }
-
-extension TimeInterval {
-    
-    static let day = 24 * hour
-    
-    static let hour = 60 * minute
-    
-    static let minute = 60.0
-}
