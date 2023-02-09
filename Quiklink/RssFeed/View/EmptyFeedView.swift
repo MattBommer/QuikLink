@@ -1,6 +1,6 @@
 //
 //  EmptyFeedView.swift
-//  RssReader
+//  Quiklink
 //
 //  Created by Matt Bommer on 2/8/23.
 //

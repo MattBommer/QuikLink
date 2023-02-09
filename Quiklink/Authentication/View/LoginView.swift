@@ -1,6 +1,6 @@
 //
 //  LoginView.swift
-//  RssReader
+//  Quiklink
 //
 //  Created by Matt Bommer on 1/12/23.
 //

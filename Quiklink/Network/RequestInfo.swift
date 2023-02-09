@@ -1,6 +1,6 @@
 //
 //  RequestInfo.swift
-//  RssReader
+//  Quiklink
 //
 //  Created by Matt Bommer on 2/7/23.
 //

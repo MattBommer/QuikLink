@@ -34,7 +34,7 @@
 		80DFAD5A29772FB9006BAED6 /* Article.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DFAD5929772FB9006BAED6 /* Article.swift */; };
 		80DFAD5C29773B7B006BAED6 /* HomeHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DFAD5B29773B7B006BAED6 /* HomeHeaderView.swift */; };
 		80E209F029881C6D00C0128E /* LogoutModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80E209EF29881C6D00C0128E /* LogoutModalView.swift */; };
-		80FC8732296E00380060D735 /* RssReaderApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FC8731296E00380060D735 /* RssReaderApp.swift */; };
+		80FC8732296E00380060D735 /* Quiklink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FC8731296E00380060D735 /* Quiklink.swift */; };
 		80FC8734296E00380060D735 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FC8733296E00380060D735 /* ContentView.swift */; };
 		80FC8736296E00390060D735 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 80FC8735296E00390060D735 /* Assets.xcassets */; };
 		80FC8739296E00390060D735 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 80FC8738296E00390060D735 /* Preview Assets.xcassets */; };
@@ -78,7 +78,7 @@
 		80E209EF29881C6D00C0128E /* LogoutModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutModalView.swift; sourceTree = "<group>"; };
 		80F635EB296F277500F9D7DA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		80FC872E296E00380060D735 /* Quiklink.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Quiklink.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		80FC8731296E00380060D735 /* RssReaderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RssReaderApp.swift; sourceTree = "<group>"; };
+		80FC8731296E00380060D735 /* Quiklink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quiklink.swift; sourceTree = "<group>"; };
 		80FC8733296E00380060D735 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		80FC8735296E00390060D735 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		80FC8738296E00390060D735 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -247,7 +247,7 @@
 			isa = PBXGroup;
 			children = (
 				80F635EB296F277500F9D7DA /* Info.plist */,
-				80FC8731296E00380060D735 /* RssReaderApp.swift */,
+				80FC8731296E00380060D735 /* Quiklink.swift */,
 				80FC8733296E00380060D735 /* ContentView.swift */,
 				80045B2A2992A7A400D5CF87 /* Network */,
 				80FC8746296E09E30060D735 /* Authentication */,
@@ -436,7 +436,7 @@
 				8053FE07297089A600AE6EB4 /* HomeView.swift in Sources */,
 				80045B4229940BC100D5CF87 /* EmptyFeedView.swift in Sources */,
 				80171DDE29899A3900A11B5A /* AddFeedModalView.swift in Sources */,
-				80FC8732296E00380060D735 /* RssReaderApp.swift in Sources */,
+				80FC8732296E00380060D735 /* Quiklink.swift in Sources */,
 				80171DDC2989774400A11B5A /* ManageFeedView.swift in Sources */,
 				808A8A882979C06A00332431 /* RootModalView.swift in Sources */,
 				80FC8748296E0A0C0060D735 /* AuthViewModel.swift in Sources */,

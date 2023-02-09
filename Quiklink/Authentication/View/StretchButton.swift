@@ -1,6 +1,6 @@
 //
-//  ActionButtonView.swift
-//  RssReader
+//  StretchButton.swift
+//  Quiklink
 //
 //  Created by Matt Bommer on 1/24/23.
 //

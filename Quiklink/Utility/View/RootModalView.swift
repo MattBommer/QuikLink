@@ -1,6 +1,6 @@
 //
-//  PopupModal.swift
-//  RssReader
+//  RootModalView.swift
+//  Quiklink
 //
 //  Created by Matt Bommer on 1/19/23.
 //

@@ -1,6 +1,6 @@
 //
-//  UserInputValidationViewModel.swift
-//  RssReader
+//  LoginViewModel.swift
+//  Quiklink
 //
 //  Created by Matt Bommer on 1/25/23.
 //

@@ -1,6 +1,6 @@
 //
 //  LogoutModalView.swift
-//  RssReader
+//  Quiklink
 //
 //  Created by Matt Bommer on 1/30/23.
 //

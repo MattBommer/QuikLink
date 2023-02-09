@@ -1,6 +1,6 @@
 //
-//  RSSFeedView.swift
-//  RssReader
+//  HomeView.swift
+//  Quiklink
 //
 //  Created by Matt Bommer on 1/12/23.
 //

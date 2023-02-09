@@ -1,6 +1,6 @@
 //
 //  GradientLoadingView.swift
-//  RssReader
+//  Quiklink
 //
 //  Created by Matt Bommer on 1/26/23.
 //
