@@ -10,7 +10,6 @@ import UIKit
 import SwiftUI
 
 extension UIColor {
-    
     convenience init?(hexValue: String) {
             let start = hexValue.hasPrefix("0x") ? hexValue.index(hexValue.startIndex, offsetBy: 2) : hexValue.startIndex
             let hexCode = hexValue[start...]
@@ -70,4 +69,29 @@ extension Error {
         }
 
     }
+}
+
+extension URL {
+    init?(string: String?) {
+        guard let string = string else { return nil }
+        self.init(string: string)
+    }
+}
+
+extension Image {
+    @ViewBuilder
+    func icon(size: CGSize = CGSize(width: 20, height: 20), edges: Edge.Set = .all, padding: CGFloat = 16) -> some View {
+        self
+            .resizable()
+            .frame(width: size.width, height: size.height)
+            .padding(edges, padding)
+    }
+}
+
+extension TimeInterval {
+    static let day = 24 * hour
+    
+    static let hour = 60 * minute
+    
+    static let minute = 60.0
 }
