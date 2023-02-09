@@ -1,6 +1,6 @@
 //
-//  AddFeedModel.swift
-//  RssReader
+//  FeedDTOs.swift
+//  Quiklink
 //
 //  Created by Matt Bommer on 1/20/23.
 //

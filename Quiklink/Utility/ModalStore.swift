@@ -1,6 +1,6 @@
 //
 //  ModalStore.swift
-//  RssReader
+//  Quiklink
 //
 //  Created by Matt Bommer on 1/19/23.
 //

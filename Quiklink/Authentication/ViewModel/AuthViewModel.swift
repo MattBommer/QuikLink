@@ -1,6 +1,6 @@
 //
-//  Authentication.swift
-//  RssReader
+//  AuthViewModel.swift
+//  Quiklink
 //
 //  Created by Matt Bommer on 1/10/23.
 //
